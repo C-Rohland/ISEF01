@@ -6,10 +6,22 @@ import Image from 'next/image'
 import {RiAtFill, RiFileLockLine } from "react-icons/ri";
 import { useState } from 'react';
 import { signIn, signOut } from "next-auth/react"
+import { useFormik } from 'formik';
 
 export default function Login(){
 
     const [show, setShow] = useState(false)
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: ''
+        },
+        onSubmit
+    })
+
+    async function onSubmit(values){
+        console.log(values)
+    }
 
     return(
         <Layout>
@@ -32,6 +44,7 @@ export default function Login(){
                 name='email'
                 placeholder='Deine IU-Emailadresse'
                 className={styles.input_text}
+                    {...formik.getFieldProps('email')}
                 />
                 <span className='icon flex items-center px-4'>
                 <RiAtFill size={25}/>
@@ -43,6 +56,7 @@ export default function Login(){
                 name='password'
                 placeholder='Dein Passwort'
                 className={styles.input_text}
+                {...formik.getFieldProps('email')}
                 />
                 <span className='icon flex items-center px-4' onClick={() => setShow(!show)}>
                 <RiFileLockLine size={25}/>
@@ -59,7 +73,7 @@ export default function Login(){
         </form>
         {/* bottom */}
         <p className='text-center text-gray-400'>
-            Du hast noch keinen Account? Dann klicke hier <Link href="/register"><span className='text-blue-700'>Registrieren</span></Link>
+            Du hast noch keinen Account? Dann klicke hier um dich zu <Link href="/register"><span className='text-blue-700'>registrieren</span></Link>
         </p>
         </section>
 
