@@ -7,6 +7,7 @@ import { HiOutlineUser } from "react-icons/hi";
 import { RiAtFill, RiFileLockLine } from "react-icons/ri";
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import { registerValidate } from '../lib/validate'
 
 export default function Register(){
 
@@ -18,6 +19,7 @@ export default function Register(){
             password: '',
             cpassword: ''
         },
+        validate: registerValidate,
         onSubmit
     })
 
@@ -30,7 +32,7 @@ export default function Register(){
 
        
         <Head>
-        <title>Register</title>
+        <title>Registerung</title>
         </Head>
         
         <section className='w-3/4 mx-auto flex flex-col gap-10'>
@@ -53,6 +55,7 @@ export default function Register(){
                         <HiOutlineUser size={25} />
                     </span>
                 </div>
+                {formik.errors.username && formik.touched.username ? <span className='text-rose-500'>{formik.errors.username}</span> : <></>}
                 <div className={styles.input_group}>
                     <input 
                     type="email"
@@ -65,6 +68,7 @@ export default function Register(){
                         <RiAtFill size={25}/>
                     </span>
                 </div>
+                {formik.errors.email && formik.touched.email ? <span className='text-rose-500'>{formik.errors.email}</span> : <></>}
                 <div className={styles.input_group}>
                     <input 
                     type={`${show.password ? "text" : "password"}`}
@@ -77,6 +81,7 @@ export default function Register(){
                         <RiFileLockLine size={25} />
                     </span>
                 </div>
+                {formik.errors.password && formik.touched.password ? <span className='text-rose-500'>{formik.errors.password}</span> : <></>}
 
                 <div className={styles.input_group}>
                     <input 
@@ -90,7 +95,7 @@ export default function Register(){
                         <RiFileLockLine size={25} />
                     </span>
                 </div>
-               
+                {formik.errors.cpassword && formik.touched.cpassword ? <span className='text-rose-500'>{formik.errors.cpassword}</span> : <></>}
 
                 {/* login buttons */}
                 <div className="input-button">

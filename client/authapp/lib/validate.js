@@ -31,7 +31,7 @@ export function registerValidate(values){
 
     if (!values.email) {
         errors.email = 'Erforderlich';
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    } else if (!/^[A-Z0-9._%+-]+@(iu-study\.org|iu\.org|iubh-fernstudium\.de)$/i.test(values.email)) {
         errors.email = 'Ungültige Emailadresse';
     }
 
@@ -48,9 +48,9 @@ export function registerValidate(values){
     if(!values.cpassword){
         errors.cpassword = "Erforderlich";
     } else if(values.password !== values.cpassword){
-        errors.cpassword = "Password Not Match...!"
+        errors.cpassword = "Die Passwörter stimmen nicht überein"
     } else if(values.cpassword.includes(" ")){
-        errors.cpassword = "Passwörter stimmen nicht überein"
+        errors.cpassword = "Ungültiges Passwort"
     }
 
     return errors;
