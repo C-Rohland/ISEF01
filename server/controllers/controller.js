@@ -1,6 +1,37 @@
 import Questions from "../models/questionSchema.js";
 import Results from "../models/resultSchema.js";
 import questions, { answers } from '../database/data.js'
+import User from "../models/userSchema.js";
+import bcrypt from 'bcryptjs';
+
+/** Register a new user */
+export async function registerNewUser(req, res) {
+    try {
+        const { username, email, password } = req.body;
+
+        // Überprüfen, ob der Benutzer bereits existiert
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "Benutzer existiert bereits." });
+        }
+
+        // Das Passwort hashen
+        const hashedPassword = await bcrypt.hash(password, 8);
+
+        // Erstelle ein neues User-Objekt und speichere es in der Datenbank
+        const newUser = new User({
+            username,
+            email,
+            password: hashedPassword,
+        });
+
+        await newUser.save();
+        res.status(201).json({ message: "Benutzer erfolgreich registriert!" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 
 /** get all questions */
 export async function getQuestions(req, res){
