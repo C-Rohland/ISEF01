@@ -32,6 +32,43 @@ export async function registerNewUser(req, res) {
     }
 }
 
+/** Login a user */
+export async function loginUser(req, res) {
+    try {
+        const { email, password } = req.body;
+
+        // Finde den Benutzer anhand der E-Mail
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "Benutzer nicht gefunden." });
+        }
+
+        // Überprüfe das Passwort
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if (!isPasswordMatch) {
+            return res.status(400).json({ message: "Ungültiges Passwort." });
+        }
+
+        // Generiere ein Token für den Benutzer (verwende hier zum Beispiel JWT)
+        const token = generateToken(user);
+
+        // Sende den Token und ggf. Benutzerinformationen zurück
+        res.status(200).json({
+            message: "Erfolgreich angemeldet!",
+            token,
+            user: { id: user._id, username: user.username, email: user.email }
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+function generateToken(user) {
+    // Ersetze 'mysecret' mit einem richtigen geheimen Schlüssel und konfiguriere die Optionen nach Bedarf
+    return jwt.sign({ id: user._id }, 'mysecret', { expiresIn: '1h' });
+}
+
+
 
 /** get all questions */
 export async function getQuestions(req, res){

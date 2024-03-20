@@ -8,7 +8,7 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const emailRegex = /@(iu-study\.org|iu\.org|iubh-fernstudium\.de)$/;
 
@@ -26,10 +26,31 @@ function Register() {
       return;
     }
 
-    // Hier könnte die Logik zur Übermittlung der Registrierungsdaten stehen
-    console.log('Registrierungsversuch mit:', username, email, password);
+    try {
+      const response = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          email,
+          password, // Achte darauf, dass dein Backend HTTPS unterstützt, um Klartext-Passwörter sicher zu übertragen.
+        }),
+      });
 
-    // Weiterleitung, Zustandsaktualisierung oder ähnliches nach erfolgreicher Registrierung
+      if (!response.ok) {
+        throw new Error('Netzwerkantwort war nicht ok.');
+      }
+
+      const data = await response.json();
+      console.log('Registrierungsantwort:', data);
+      alert('Registrierung erfolgreich!');
+      navigate('/login'); // Gehe zur Login-Seite, nachdem die Registrierung erfolgreich war.
+    } catch (error) {
+      console.error('Fehler bei der Registrierung:', error);
+      alert('Registrierung fehlgeschlagen: ' + (error.message || 'Unbekannter Fehler'));
+    }
   };
 
   const navigateToLogin = () => {

@@ -16,6 +16,9 @@ router.route('/result')
         .post(controller.storeResult)
         .delete(controller.dropResult)
 
-router.post('/register', controller.registerNewUser);
+router.route('/register')
+        .get(controller.registerNewUser)
+        .post(controller.registerNewUser)
+        .delete(controller.registerNewUser);
 
 export default router;
