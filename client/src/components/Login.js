@@ -8,7 +8,7 @@ function Login() {
   const navigate = useNavigate();
 
   // Funktion, die beim Einreichen des Formulars ausgelöst wird
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Verhindert das Neuladen der Seite beim Einreichen
 
     // Einfache Validierung
@@ -17,10 +17,34 @@ function Login() {
       return;
     }
 
-    // Hier könnte die Logik zur Überprüfung der Anmeldedaten stehen
-    console.log('Login-Versuch mit:', username, password);
+    try {
+      // Ersetze 'http://localhost:5000/api/login' mit der URL deines eigenen Servers
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
 
-    // Weiterleitung, Zustandsaktualisierung oder ähnliches nach erfolgreicher Anmeldung
+      if (!response.ok) {
+        throw new Error('Login fehlgeschlagen');
+      }
+
+      const data = await response.json();
+      console.log('Login erfolgreich:', data);
+
+      // Speichere Token, falls eines vom Server zurückgegeben wurde
+      // Beispiel: localStorage.setItem('token', data.token);
+
+      navigate('/main'); // Ändere '/main' zu dem Pfad, der deiner Hauptkomponente entspricht
+    } catch (error) {
+      console.error(error);
+      alert('Anmeldung fehlgeschlagen: ' + error.message);
+    }
   };
 
   const navigateToRegister = () => {
