@@ -1,152 +1,102 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root{
-  --primary-color: #0DFF92;
-  --dark-color:#222222;
-  --light-color: #f0f0f0;
+  --primary-color: #3498db; /* Blauton für Hauptelemente */
+  --dark-color: #277cd1; /* Dunkler Hintergrund für Kontrast */
+  --light-color: #f0f0f0; /* Helle Farbe für Text */
 }
 
 body, html{
   height: 100%;
-  background: var(--dark-color)
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-color);
+  margin: 0; /* Entfernt den Standard-Margin */
 }
 
 * > *{
-    font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 .container{
-  display: block;
-  position: relative;
-  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   height: auto;
-  width: 800px;
+  width: 80%; /* Anpassung der Breite für Zentrierung und Responsive Design */
+  max-width: 800px; /* Maximale Breite des Containers */
   padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Tiefe */
+  background: var(--light-color); /* Hintergrund des Containers */
+  border-radius: 8px; /* Abgerundete Ecken */
 }
 
 .container .title{
-    font-size: 3em;
-    text-align: center;
-    border: 5px solid var(--primary-color);
-    padding: .3em .2em;
-    border-radius: 4px;
+  font-size: 3em;
+  text-align: center;
+  color: var(--primary-color); /* Textfarbe anpassen */
+  padding: 0.3em 0.2em;
+  margin: 0; /* Entfernt den Standard-Margin */
 }
 
 .text-light {
-	color: var(--light-color)
+	color: var(--light-color);
 }
 
 .container ul{
   list-style: none;
   margin: 0;
   padding: 0;
-	overflow: auto;
+  overflow: auto;
+  width: 100%; /* Sorgt dafür, dass die Liste die volle Containerbreite einnimmt */
 }
 
 .container .questions{
-    padding: 3em;
+  padding: 3em;
+  width: 100%; /* Sorgt dafür, dass die Fragen die volle Containerbreite einnehmen */
 }
-
-/* 
-.container .questions .qid{
-  padding: .2em .7em;
-  color: #222222;
-  background-color: #0DFF92;
-  border-radius: 50px;
-} */
 
 .container .grid{
-    margin-top: 3em;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  margin-top: 3em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%; /* Anpassung für die gesamte Breite */
 }
 
-
 .container .btn{
-    padding: .2em 1.7em;
-    border: none;
-    border-radius: .1em;
-    font-size: 1.2em;
+  padding: 0.2em 1.7em;
+  border: none;
+  border-radius: 0.1em;
+  font-size: 1.2em;
+  color: #fff; /* Weiße Schriftfarbe für Kontrast */
+  background-color: var(--primary-color); /* Hintergrundfarbe für Buttons */
+  transition: background-color 0.3s ease; /* Glatter Übergang für Hover-Effekt */
 }
 
 .container .btn:hover{
-    cursor: pointer;
-    background-color: #f0f0f0;
-    color: #202020;
+  background-color: darken(var(--primary-color), 10%); /* Dunklere Schattierung beim Hover */
 }
 
-.next{
-    background-color: var(--primary-color);
-    justify-self: flex-end;
-}
-
-.prev{
-    background-color: #faff5a;
-    justify-self: flex-start;
+.next, .prev {
+  justify-self: center; /* Zentriert die Navigationselemente */
 }
 
 ul li{
-  color: #AAAAAA;
-  display: block;
-  position: relative;
-  float: left;
+  color: var(--light-color);
+  display: flex;
+  align-items: center;
+  justify-content: start;
   width: 100%;
-  height: 100px;
-	border-bottom: 1px solid #333;
-}
-
-ul li input[type=radio]{
-  position: absolute;
-  visibility: hidden;
+  border-bottom: 1px solid #333;
+  padding: 15px; /* Bessere Abstandsgestaltung */
 }
 
 ul li label{
-  display: block;
-  position: relative;
-  font-weight: 300;
-  font-size: 1.35em;
-  padding: 25px 25px 25px 80px;
-  margin: 10px auto;
-  height: 30px;
-  z-index: 9;
-  cursor: pointer;
-  -webkit-transition: all 0.25s linear;
-}
-
-ul li:hover label{
-	color: #FFFFFF;
-}
-
-ul li .check{
-  display: block;
-  position: absolute;
-  border: 5px solid #AAAAAA;
-  border-radius: 100%;
-  height: 25px;
-  width: 25px;
-  top: 30px;
-  left: 20px;
-	z-index: 5;
-	transition: border .25s linear;
-	-webkit-transition: border .25s linear;
-}
-
-ul li:hover .checked {
-  border: 5px solid #FFFFFF;
-}
-
-ul li .check::before {
-  display: block;
-  position: absolute;
-	content: '';
-  border-radius: 100%;
-  height: 15px;
-  width: 15px;
-  top: 5px;
-	left: 5px;
-  margin: auto;
-	transition: background 0.25s linear;
-	-webkit-transition: background 0.25s linear;
+  margin: 0 auto; /* Zentriert den Text innerhalb des Labels */
+  padding-left: 40px; /* Abstand für das Radio-Button-Design */
 }
 
 
@@ -169,4 +119,49 @@ input[type=radio]:checked ~ .text-primary{
 
 .checked::before{
   background: var(--primary-color)
+}
+
+/* Vorherige Styles bleiben unverändert */
+
+.content-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff; /* Oder eine andere gewünschte Hintergrundfarbe */
+  border-radius: 20px; /* Abgerundete Ecken */
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Schatten für Tiefe */
+}
+
+.image-side {
+  flex: 1; /* Flex-Grow für flexible Anpassung */
+  padding: 20px; /* Abstand */
+}
+
+.image-side img {
+  width: 100%; /* Sorgt dafür, dass das Bild responsiv ist */
+  max-width: 400px; /* Maximale Breite des Bildes */
+  height: auto; /* Erhält das Seitenverhältnis */
+}
+
+.text-side {
+  flex: 1; /* Flex-Grow für flexible Anpassung */
+  padding: 20px; /* Abstand */
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5em; /* Hiermit wird der Abstand zwischen Label und Eingabefeld eingestellt */
+}
+
+.form-group input {
+  width: 100%; /* Eingabefeld nimmt die volle Breite des .form-group Elements ein */
+  padding: 8px; /* Ein bisschen Polsterung für das Eingabefeld */
+  border: 1px solid #ccc; /* Ein einfacher Border */
+  border-radius: 4px; /* Leicht abgerundete Ecken für das Eingabefeld */
+  margin-top: 0.5em; /* Abstand zum vorherigen Element im .form-group Container */
+}
+
+/* Hier kannst du weitere Styles für die form-group hinzufügen, wie zum Beispiel für Abstände zwischen den form-groups selbst */
+.form-group {
+  margin-bottom: 1em; /* Abstand zwischen den einzelnen .form-group Blöcken */
 }

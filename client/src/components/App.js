@@ -4,6 +4,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 /** import components */
 import Main from './Main';
+import Login from './Login';
+import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
 import { CheckUserExist } from '../helper/helper';
@@ -12,8 +14,16 @@ import { CheckUserExist } from '../helper/helper';
 /** react routes */
 const router = createBrowserRouter([
   {
-    path : '/',
+    path : '/main',
     element : <Main></Main>
+  },
+  {
+    path : '/',
+    element : <Login></Login>
+  },
+  {
+    path : '/register',
+    element : <Register></Register>
   },
   {
     path : '/quiz',
