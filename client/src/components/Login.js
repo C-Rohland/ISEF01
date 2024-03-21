@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 function Login() {
   // Zustände für Benutzername und Passwort
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -12,20 +13,19 @@ function Login() {
     e.preventDefault(); // Verhindert das Neuladen der Seite beim Einreichen
 
     // Einfache Validierung
-    if (!username || !password) {
+    if (!email || !password) {
       alert('Bitte füllen Sie beide Felder aus.');
       return;
     }
 
     try {
-      // Ersetze 'http://localhost:5000/api/login' mit der URL deines eigenen Servers
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username,
+          email,
           password,
         }),
       });
@@ -36,10 +36,8 @@ function Login() {
 
       const data = await response.json();
       console.log('Login erfolgreich:', data);
-
-      // Speichere Token, falls eines vom Server zurückgegeben wurde
-      // Beispiel: localStorage.setItem('token', data.token);
-
+      alert('Login erfolgreich!');
+// Hier könntest du den Token speichern
       navigate('/main'); // Ändere '/main' zu dem Pfad, der deiner Hauptkomponente entspricht
     } catch (error) {
       console.error(error);
@@ -62,13 +60,13 @@ function Login() {
           <p>Bitte logge dich mit der IU-Mailadresse ein, um fortzufahren.</p>
           <form onSubmit={handleSubmit}>
           <div className="form-group">
-              <label htmlFor="username">Benutzername</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Benutzername"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
               />
             </div>
             <div className="form-group">

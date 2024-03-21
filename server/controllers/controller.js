@@ -3,6 +3,8 @@ import Results from "../models/resultSchema.js";
 import questions, { answers } from '../database/data.js'
 import User from "../models/userSchema.js";
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
 
 /** Register a new user */
 export async function registerNewUser(req, res) {
@@ -34,24 +36,33 @@ export async function registerNewUser(req, res) {
 
 /** Login a user */
 export async function loginUser(req, res) {
+    console.log('Login Request:', req.body); 
+        
     try {
         const { email, password } = req.body;
+
+        if (!email || !password) {
+            console.log('Fehlende Anmeldedaten:', req.body); // Vor der möglichen Fehlerquelle
+            return res.status(400).json({ message: "Fehlende Anmeldedaten." });
+        }
 
         // Finde den Benutzer anhand der E-Mail
         const user = await User.findOne({ email });
         if (!user) {
+            console.log('Benutzer nicht gefunden:', email);
             return res.status(404).json({ message: "Benutzer nicht gefunden." });
         }
 
         // Überprüfe das Passwort
         const isPasswordMatch = await bcrypt.compare(password, user.password);
         if (!isPasswordMatch) {
+            console.log('Ungültiges Passwort:', password);
             return res.status(400).json({ message: "Ungültiges Passwort." });
         }
 
         // Generiere ein Token für den Benutzer (verwende hier zum Beispiel JWT)
         const token = generateToken(user);
-
+        console.log('Token generiert für:', user);
         // Sende den Token und ggf. Benutzerinformationen zurück
         res.status(200).json({
             message: "Erfolgreich angemeldet!",
@@ -59,6 +70,7 @@ export async function loginUser(req, res) {
             user: { id: user._id, username: user.username, email: user.email }
         });
     } catch (error) {
+        console.error('Login Fehler:', error);
         res.status(500).json({ error: error.message });
     }
 }

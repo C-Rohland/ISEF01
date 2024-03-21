@@ -1,8 +1,7 @@
 import { Router } from "express";
-const router = Router();
-
-/** import controllers */
 import * as controller from '../controllers/controller.js';
+
+const router = Router();
 
 /** Questions Routes API */
 
@@ -17,8 +16,8 @@ router.route('/result')
         .delete(controller.dropResult)
 
 router.route('/register')
-        .get(controller.registerNewUser)
         .post(controller.registerNewUser)
-        .delete(controller.registerNewUser);
+ 
+router.post('/login', controller.loginUser);
 
 export default router;

@@ -27,7 +27,7 @@ function Register() {
     }
 
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

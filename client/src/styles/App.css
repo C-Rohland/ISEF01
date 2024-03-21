@@ -88,7 +88,7 @@ ul li{
   color: var(--light-color);
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;;
   width: 100%;
   border-bottom: 1px solid #333;
   padding: 15px; /* Bessere Abstandsgestaltung */
