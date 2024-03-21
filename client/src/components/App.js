@@ -7,6 +7,7 @@ import Main from './Main';
 import Quiz from './Quiz';
 import Result from './Result';
 import Homepage from './Homepage';
+import Login from './Login';
 import { CheckUserExist } from '../helper/helper';
 
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path : '/',
     element : <Homepage />
+  },
+  {
+    path : '/login',
+    element : <Login />
   },
 ])
 
