@@ -3,25 +3,25 @@ import { useNavigate } from 'react-router-dom';
 import {  HiEye, HiEyeOff} from "react-icons/hi";
 
 function Register() {
+  // Zustandsvariablen für Formulardaten und UI-Steuerung
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const navigate = useNavigate();
-
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const navigate = useNavigate();
 
+  // Funktionen zum Umschalten der Passwortsichtbarkeit
   const toggleShowPassword = () => setShowPassword(!showPassword);
   const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
 
-
-  // nur IU Emailadressen erlauben
+  // Funktion zur Handhabung des Registrierungsversuchs
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailRegex = /@(iu-study\.org|iu\.org|iubh-fernstudium\.de)$/;
+    const emailRegex = /@(iu-study\.org|iu\.org|iubh-fernstudium\.de)$/;// nur IU Emailadressen erlauben
 
-    // Überprüfe die Eingaben
+    // Validierung der Eingaben
     if (!username || !email || !password || !confirmPassword) {
       alert('Bitte füllen Sie alle Felder aus.');
       return;
@@ -35,6 +35,7 @@ function Register() {
       return;
     }
 
+    // Versucht, die Registrierung über die API durchzuführen
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/register`, {
         method: 'POST',
@@ -44,7 +45,7 @@ function Register() {
         body: JSON.stringify({
           username,
           email,
-          password, // Achte darauf, dass dein Backend HTTPS unterstützt, um Klartext-Passwörter sicher zu übertragen.
+          password, 
         }),
       });
 
@@ -52,20 +53,22 @@ function Register() {
         throw new Error('Netzwerkantwort war nicht ok.');
       }
 
+      // Versucht, die Registrierung über die API durchzuführen
       const data = await response.json();
       console.log('Registrierungsantwort:', data);
-      alert('Registrierung erfolgreich!');
-      navigate('/'); // Gehe zur Login-Seite, nachdem die Registrierung erfolgreich war.
+      navigate('/'); // Leitet den Benutzer zur Login-Seite weiter
     } catch (error) {
       console.error('Fehler bei der Registrierung:', error);
       alert('Registrierung fehlgeschlagen: ' + (error.message || 'Unbekannter Fehler'));
     }
   };
 
+  // Ermöglicht die Navigation zur Login-Seite
   const navigateToLogin = () => {
-    navigate('/'); // Pfad zur Login-Seite
+    navigate('/'); 
   };
 
+  //  Registrierungsformular
   return (
     <div className="login-container">
       <div className="content-box">
