@@ -160,6 +160,5 @@ input[type=radio]:checked ~ .text-primary{
   margin-top: 0.5em; /* Abstand zum vorherigen Element im .form-group Container */
 }
 
-.form-group {
-  margin-bottom: 1em; /* Abstand zwischen den einzelnen .form-group Blöcken */
-}
+
+

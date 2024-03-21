@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {  HiEye, HiEyeOff} from "react-icons/hi";
 
 function Register() {
   const [username, setUsername] = useState('');
@@ -8,6 +9,14 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate();
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const toggleShowPassword = () => setShowPassword(!showPassword);
+  const toggleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+
+
+  // nur IU Emailadressen erlauben
   const handleSubmit = async (e) => {
     e.preventDefault();
     const emailRegex = /@(iu-study\.org|iu\.org|iubh-fernstudium\.de)$/;
@@ -46,7 +55,7 @@ function Register() {
       const data = await response.json();
       console.log('Registrierungsantwort:', data);
       alert('Registrierung erfolgreich!');
-      navigate('/login'); // Gehe zur Login-Seite, nachdem die Registrierung erfolgreich war.
+      navigate('/'); // Gehe zur Login-Seite, nachdem die Registrierung erfolgreich war.
     } catch (error) {
       console.error('Fehler bei der Registrierung:', error);
       alert('Registrierung fehlgeschlagen: ' + (error.message || 'Unbekannter Fehler'));
@@ -77,6 +86,7 @@ function Register() {
                 required
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="email">E-Mail-Adresse</label>
               <input
@@ -88,28 +98,43 @@ function Register() {
                 required
               />
             </div>
+
             <div className="form-group">
               <label htmlFor="password">Passwort</label>
+              <div className="input-group">
               <input
-                type="password"
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Passwort"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Passwort bestätigen</label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Passwort bestätigen"
-                required
-              />
-            </div>
+              type={showPassword ? "text" : "password"}
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Passwort"
+              required
+            />
+            <span onClick={toggleShowPassword} className="icon">
+              {showPassword ? <HiEyeOff /> : <HiEye />}
+            </span>
+          </div>
+        </div>
+             
+
+
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Passwort bestätigen</label>
+          <div className="input-group">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Passwort bestätigen"
+              required
+            />
+            <span onClick={toggleShowConfirmPassword} className="icon">
+              {showConfirmPassword ? <HiEyeOff /> : <HiEye />}
+            </span>
+          </div>
+        </div>
+              
             <button type="submit">Registrieren</button>
           </form>
           <p>Du hast schon einen Account? Hier anmelden</p>
