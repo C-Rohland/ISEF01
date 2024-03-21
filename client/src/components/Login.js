@@ -46,7 +46,8 @@ function Login() {
 
       // Verarbeitet die Antwort
       const data = await response.json();
-      console.log('Login erfolgreich:', data);
+      sessionStorage.setItem('username', data.user.username); // Speichert die E-Mail als Benutzernamen in sessionStorage
+      console.log(sessionStorage.getItem('username'));
 
        // Navigiert zur Hauptseite
       navigate('/main'); 

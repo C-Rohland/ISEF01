@@ -17,6 +17,7 @@ router.route('/result')
 
 router.route('/register')
         .post(controller.registerNewUser)
+        .get(controller.registerNewUser)
  
 router.post('/login', controller.loginUser);
 

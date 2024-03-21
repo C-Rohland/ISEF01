@@ -8,8 +8,6 @@ import Login from './Login';
 import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
-import { CheckUserExist } from '../helper/helper';
-
 
 /** react routes */
 const router = createBrowserRouter([
@@ -17,8 +15,9 @@ const router = createBrowserRouter([
     path : '/main',
     element : <Main></Main>
   },
+  
   {
-    path : '/login',
+    path : '/',
     element : <Login></Login>
   },
   {
@@ -27,12 +26,12 @@ const router = createBrowserRouter([
   },
   {
     path : '/quiz',
-    element : <CheckUserExist><Quiz /></CheckUserExist>
+    element : <Quiz></Quiz>
   },
   {
     path : '/result',
-    element : <CheckUserExist><Result /></CheckUserExist>
-  },
+    element : <Result></Result>
+  }
 ])
 
 function App() {
