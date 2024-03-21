@@ -1,10 +1,9 @@
-import React, { useRef } from 'react'
+//import React, { useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import '../styles/Main.css'
 
 export default function Main() {
 
-    const inputRef = useRef(null)
     const navigate = useNavigate();
 
     const username = sessionStorage.getItem('username');
@@ -13,6 +12,12 @@ export default function Main() {
 
     const startQuiz = () => {
         navigate('/quiz'); 
+        }
+    const createQuiz = () => {
+        navigate('/createQuiz'); 
+        }
+    const seeResults = () => {
+        navigate('/resultTable'); 
         }
     
 
@@ -33,11 +38,16 @@ export default function Main() {
      </div>
 
           
-            <div className='start'>
+     <div className='start'>
             <button onClick={startQuiz}>Neues Quiz starten</button>
+          
+            <button onClick={seeResults}>Leaderboard</button>
+          
+            <button onClick={createQuiz}>Quiz erstellen</button>
+            </div>
             </div>
 
-            </div>
+            
   );
 
 }

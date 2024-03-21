@@ -12,24 +12,32 @@ export default function Questions({ onChecked }) {
     const [checked, setChecked] = useState(undefined)
     const { trace } = useSelector(state => state.questions);
     const result = useSelector(state => state.result.result);
-    const [{ isLoading, apiData, serverError}] = useFetchQestion() 
+    const [{ isLoading, serverError}] = useFetchQestion() 
 
     const questions = useSelector(state => state.questions.queue[state.questions.trace])
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(updateResult({ trace, checked}))
-    }, [checked])
+    }, [checked, dispatch, trace])
     
     function onSelect(i){
         onChecked(i)
         setChecked(i)
-        dispatch(updateResult({ trace, checked}))
     }
 
+    function renderErrorMessage(error) {
+        if (typeof error === 'object' && error !== null && error.message) {
+          return error.message;
+        } else if (typeof error === 'string') {
+          return error;
+        }
+        return "Unknown Error";
+      }
 
     if(isLoading) return <h3 className='text-light'>isLoading</h3>
-    if(serverError) return <h3 className='text-light'>{serverError || "Unknown Error"}</h3>
+    // if(serverError) return <h3 className='text-light'>{serverError.message || "Unknown Error"}</h3>
+    if(serverError) return <h3 className='text-light'>{renderErrorMessage(serverError)}</h3>
 
   return (
     <div className='questions'>
