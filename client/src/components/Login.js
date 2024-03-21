@@ -47,7 +47,6 @@ function Login() {
       // Verarbeitet die Antwort
       const data = await response.json();
       console.log('Login erfolgreich:', data);
-      alert('Login erfolgreich!');
 
        // Navigiert zur Hauptseite
       navigate('/main'); 
