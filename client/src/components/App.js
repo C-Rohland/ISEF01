@@ -8,6 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
+import ResultTable from './ResultTable';
 
 /** react routes */
 const router = createBrowserRouter([
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path : '/result',
     element : <Result></Result>
+  },
+  {
+    path : '/resultTable',
+    element : <ResultTable></ResultTable>
   }
 ])
 

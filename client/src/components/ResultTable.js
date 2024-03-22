@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getServerData } from '../helper/helper'
+import { useNavigate } from 'react-router-dom';
 
 export default function ResultTable() {
 
@@ -10,6 +11,11 @@ export default function ResultTable() {
             setData(res)
         })
     })
+
+    const navigate = useNavigate();
+    const navigateToMain = () => {
+        navigate('/main'); 
+        }
 
   return (
     <div>
@@ -37,6 +43,7 @@ export default function ResultTable() {
                 
             </tbody>
         </table>
+        <button className='btn finish' onClick={navigateToMain}>zurück</button>
     </div>
   )
 }
