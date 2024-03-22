@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 /** question model */
 const questionModel = new Schema({
-    questions: { type : Array, default: []}, // create question with [] default value
+    question: { type : Array, default: []}, // create question with [] default value
     answer: String,
+    subjectnr: { type : Array, default: []},
     createdAt: { type: Date, default: Date.now },
 });
 

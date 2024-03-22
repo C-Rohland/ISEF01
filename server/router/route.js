@@ -8,7 +8,12 @@ const router = Router();
 router.route('/questions')
         .get(controller.getQuestions) /** GET Request */
         .post(controller.insertQuestions) /** POST Request */
-        .delete(controller.dropQuestions) /** DELETE Request */
+        .delete(controller.dropQuestions) /** DELETE all Request */
+
+router.route('/subjects')
+        .get(controller.getSubjects) /** GET Request */
+        .post(controller.insertSubjects) /** POST Request */
+        .delete(controller.dropSubjects) /** DELETE all Request */
 
 router.route('/result')
         .get(controller.getResult)
@@ -17,8 +22,10 @@ router.route('/result')
 
 router.route('/register')
         .post(controller.registerNewUser)
-        .get(controller.registerNewUser)
+        .get(controller.getUser)
  
-router.post('/login', controller.loginUser);
+router.route('/login')
+       .post(controller.loginUser)
+       .get(controller.getUser)
 
 export default router;
