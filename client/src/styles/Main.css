@@ -16,7 +16,16 @@
     font-size: 1.2em;
     color: #202020;
     text-decoration: none;
-    background-color: #faff5a;
+    background-color: #3498db;
+}
+.restart .btn{
+    padding: .2em 1.7em;
+    border: none;
+    border-radius: .1em;
+    font-size: 1.2em;
+    color: #202020;
+    text-decoration: none;
+    background-color: #34dbd3;
 }
 
 #form{

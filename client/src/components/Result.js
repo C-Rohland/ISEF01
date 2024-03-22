@@ -77,13 +77,11 @@
 import React from 'react';
 import '../styles/Result.css';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { earnPoints_Number } from '../helper/helper';
+import { useSelector, useDispatch } from 'react-redux';
+import { resetResultAction } from '../redux/result_reducer'; 
+import { usePublishResult } from '../hooks/setResult'; 
 import { useNavigate } from 'react-router-dom'
 
-// Importieren Sie die Aktion, um das Ergebnis zurückzusetzen
-import { resetResultAction } from '../redux/result_reducer';
-import { usePublishResult } from '../hooks/setResult';
 
 export default function Result() {
 
@@ -93,14 +91,14 @@ export default function Result() {
     const { questions: { answers } } = useSelector(state => state);
 
     // Berechnen Sie die Punkte und ob die Prüfung bestanden wurde
-    const correctAnswersCount = earnPoints_Number(answers, 10);
+    const correctAnswersCount = useSelector(state => state.result.correctAnswersCount);
 
     // Veröffentlichen Sie das Ergebnis (angenommen, diese Funktion wurde entsprechend angepasst)
     usePublishResult({
-        username,
+        username: sessionStorage.getItem('username'), 
         points: correctAnswersCount,
         achived : correctAnswersCount >= 5 ? "Passed" : "Failed"
-    });
+      });
 
     function onRestart(){
         dispatch(resetResultAction());
@@ -125,7 +123,7 @@ export default function Result() {
                 </div>
             </div>
 
-            <div className="start">
+            <div className="restart">
                 <Link className='btn' to={'/main'} onClick={onRestart}>Restart Quiz</Link>
             </div>
             <div className="start">

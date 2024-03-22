@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import Questions from './Questions'
-
 import { MoveNextQuestion } from '../hooks/FetchQuestion';
-import { PushAnswer } from '../hooks/setResult';
+import { pushResultAction } from '../redux/result_reducer';
 
 /** redux store import */
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+
 
 export default function Quiz({ onChecked }) {
 
@@ -29,7 +29,7 @@ export default function Quiz({ onChecked }) {
 
             /** insert a new result in the array.  */
             if(result.length <= trace){
-                dispatch(PushAnswer(check))
+                dispatch(pushResultAction(check))
             }
         } else {
             // Letzte Frage, markiere das Quiz als abgeschlossen

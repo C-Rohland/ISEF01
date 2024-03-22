@@ -1,30 +1,33 @@
-// import { postServerData } from '../helper/helper'
-// import * as Action from '../redux/result_reducer'
 
-// export const PushAnswer = (result) => async (dispatch) => {
-//     try {
-//         await dispatch(Action.pushResultAction(result))
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-// export const updateResult = (index) => async (dispatch) => {
-//     try {
-//         dispatch(Action.updateResultAction(index));
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-// /** insert user data */
-// export const usePublishResult = (resultData) => {
-//     const { result, username } = resultData;
-//     (async () => {
-//         try {
-//             if(result !== [] && !username) throw new Error("Couldn't get Result");
-//             await postServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/result`, resultData, data => data)
-//         } catch (error) {
-//             console.log(error)
-//         }
-//     })();
-// }
+const postServerData = async (url, data) => {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+  
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+  
+    return response.json();
+  }
+
+export function usePublishResult(resultData) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Annehmen, dass postServerData eine definierte Funktion ist, die eine POST-Anfrage ausführt
+    postServerData('/api/result', resultData).then(response => {
+      // Handle response
+      // Möglicherweise eine Aktion dispatchen, um den Store zu aktualisieren
+    }).catch(error => {
+      console.error("Fehler beim Veröffentlichen des Ergebnisses:", error);
+    });
+  }, [resultData, dispatch]); // Abhängigkeiten des Hooks
+}

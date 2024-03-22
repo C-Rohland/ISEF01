@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'; 
+import { setCorrectAnswersCountAction } from '../redux/result_reducer';
 
 const QuestionComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -7,10 +9,9 @@ const QuestionComponent = () => {
   const [checked, setChecked] = useState(undefined);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answerFeedback, setAnswerFeedback] = useState(null);
-
-
   const navigate = useNavigate();
-
+  const { correctAnswersCount } = useSelector(state => state.result);
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -54,18 +55,20 @@ const QuestionComponent = () => {
   const handleNext = () => {
     if (checked !== null) {
       const selectedOptionText = questions[currentIndex].options[checked]; // Text der gewählten Antwort
-      console.log("Ausgewählte Option (Text):", selectedOptionText);
-      console.log("Erwartete richtige Antwort:", questions[currentIndex].answer);
-  
-      // Vergleiche den Text der gewählten Antwort mit der richtigen Antwort
       const isCorrect = selectedOptionText === questions[currentIndex].answer; 
   
       if (isCorrect) {
-        setCorrectAnswers((prev) => prev + 1);
+        // Erhöhe die Anzahl der korrekten Antworten im lokalen und globalen Zustand
+        setCorrectAnswers((prev) => {
+          const newCount = prev + 1;
+          dispatch(setCorrectAnswersCountAction(newCount)); // Aktualisiere den Redux Store
+          return newCount;
+        });
         setAnswerFeedback("Richtig!");
       } else {
         setAnswerFeedback("Falsch!");
       }
+  
       setTimeout(() => {
         loadNextQuestion();
         setChecked(undefined); // Zurücksetzen des ausgewählten Index
@@ -75,6 +78,7 @@ const QuestionComponent = () => {
       alert("Bitte wählen Sie eine Antwort aus.");
     }
   };
+  
 
   // const saveResults = async () => {
   //   try {
@@ -84,8 +88,8 @@ const QuestionComponent = () => {
   //         'Content-Type': 'application/json',
   //       },
   //       body: JSON.stringify({
-  //         username: 'DeinBenutzername', // Ersetze dies durch den tatsächlichen Benutzernamen
-  //         answers: 'DeineAntwortenArray,' // Ersetze dies durch das tatsächliche Array von Antworten
+  //         username, 
+  //         answers,
   //       }),
   //     });
   
@@ -99,6 +103,45 @@ const QuestionComponent = () => {
   //     console.error("Fehler beim Speichern des Ergebnisses:", error);
   //   }
   // };
+  
+  const saveResults = async () => {
+    try {
+      // Hole den Benutzernamen aus dem sessionStorage
+      const username = sessionStorage.getItem('username');
+  
+      // Hole die Anzahl der korrekten Antworten aus dem Zustand der Komponente
+      const points = correctAnswers; // Verwende den Zustand `correctAnswers` für die Punktzahl
+  
+      // Stelle sicher, dass `username` und `points` verfügbar sind
+      if (!username) {
+        throw new Error("Benutzername ist nicht definiert.");
+      }
+  
+      // Sende die Punktzahl und den Benutzernamen zum Server
+      const response = await fetch('/api/result', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          points,
+        }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Netzwerkantwort war nicht ok.');
+      }
+  
+      const data = await response.json();
+      console.log("Ergebnis gespeichert:", data);
+  
+      // Nach erfolgreichem Speichern navigiere zum Ergebnisbildschirm
+      navigate('/result', { replace: true });
+    } catch (error) {
+      console.error("Fehler beim Speichern des Ergebnisses:", error);
+    }
+  };
   
   
 
