@@ -1,4 +1,5 @@
 import Questions from "../models/questionSchema.js";
+import Subjects from "../models/subjectSchema.js";
 import Results from "../models/resultSchema.js";
 import User from "../models/userSchema.js";
 import bcrypt from 'bcryptjs';
@@ -30,6 +31,16 @@ export async function registerNewUser(req, res) {
         res.status(201).json({ message: "Benutzer erfolgreich registriert!" });
     } catch (error) {
         res.status(500).json({ error: error.message });
+    }
+}
+
+/** get all users */
+export async function getUser(req, res){
+    try {
+        const r = await User.find();
+        res.json(r)
+    } catch (error) {
+        res.json({ error })
     }
 }
 
@@ -79,7 +90,36 @@ function generateToken(user) {
     return jwt.sign({ id: user._id }, 'mysecret', { expiresIn: '1h' });
 }
 
+/** get all subjects */
+export async function getSubjects(req, res){
+    try {
+        const q = await Subjects.find();
+        res.json(q)
+    } catch (error) {
+        res.json({ error })
+    }
+}
 
+/** insert all Subjects */
+export async function insertSubjects(req, res){
+    try {
+        Questions.insertMany({ subjectname, subjectnr}, function(err, data){
+            res.json({ msg: "Data Saved Successfully...!"})
+        })
+    } catch (error) {
+        res.json({ error })
+    }
+}
+
+/** Delete all Subjects */
+export async function dropSubjects(req, res){
+    try {
+         await Subjects.deleteMany();
+         res.json({ msg: "Questions Deleted Successfully...!"});
+    } catch (error) {
+         res.json({ error })
+    }
+ }
 
 /** get all questions */
 export async function getQuestions(req, res){

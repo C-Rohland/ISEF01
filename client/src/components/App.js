@@ -9,6 +9,7 @@ import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
 import Leaderboard from './Leaderboard';
+import CreateQuiz from './CreateQuiz';
 
 /** react routes */
 const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path : '/result',
     element : <Result></Result>
+  },
+  {
+    path : '/createQuiz',
+    element : <CreateQuiz></CreateQuiz>
   },
   {
     path : '/leaderboard',
