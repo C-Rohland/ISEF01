@@ -5,6 +5,10 @@ import User from "../models/userSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
+/** getUserGuide */
+export async function getUserGuide(req, res) {
+    console.log('Quiz Anleitung:', req.body); 
+}
 
 /** Register a new user */
 export async function registerNewUser(req, res) {

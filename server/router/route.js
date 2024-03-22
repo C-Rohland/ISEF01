@@ -28,4 +28,7 @@ router.route('/login')
        .post(controller.loginUser)
        .get(controller.getUser)
 
+router.route('/userguide')
+       .get(controller.getUserGuide)
+
 export default router;

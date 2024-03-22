@@ -9,6 +9,8 @@ import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
 import Leaderboard from './Leaderboard';
+import UserGuide from './UserGuide';
+
 
 /** react routes */
 const router = createBrowserRouter([
@@ -16,7 +18,10 @@ const router = createBrowserRouter([
     path : '/main',
     element : <Main></Main>
   },
-  
+  {
+    path : '/userguide',
+    element : <UserGuide></UserGuide>
+  },
   {
     path : '/',
     element : <Login></Login>
