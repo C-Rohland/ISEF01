@@ -5,6 +5,10 @@ const QuestionComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [questions, setQuestions] = useState([]); 
   const [checked, setChecked] = useState(undefined);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [answerFeedback, setAnswerFeedback] = useState(null);
+
+
   const navigate = useNavigate();
 
 
@@ -48,17 +52,57 @@ const QuestionComponent = () => {
   };
 
   const handleNext = () => {
-    // Überprüfen, ob eine Antwort ausgewählt wurde
     if (checked !== null) {
-      // Hier können Sie die ausgewählte Antwort mit der richtigen Antwort vergleichen
-      // Zum Beispiel: if (checked === questions[currentIndex].correctIndex) { ... }
-      
-      // Zur nächsten Frage wechseln
-      loadNextQuestion();
+      const selectedOptionText = questions[currentIndex].options[checked]; // Text der gewählten Antwort
+      console.log("Ausgewählte Option (Text):", selectedOptionText);
+      console.log("Erwartete richtige Antwort:", questions[currentIndex].answer);
+  
+      // Vergleiche den Text der gewählten Antwort mit der richtigen Antwort
+      const isCorrect = selectedOptionText === questions[currentIndex].answer; 
+  
+      if (isCorrect) {
+        setCorrectAnswers((prev) => prev + 1);
+        setAnswerFeedback("Richtig!");
+      } else {
+        setAnswerFeedback("Falsch!");
+      }
+      setTimeout(() => {
+        loadNextQuestion();
+        setChecked(undefined); // Zurücksetzen des ausgewählten Index
+        setAnswerFeedback(null); // Feedback zurücksetzen
+      }, 1000); // 1 Sekunde Verzögerung
     } else {
       alert("Bitte wählen Sie eine Antwort aus.");
     }
   };
+
+  // const saveResults = async () => {
+  //   try {
+  //     const response = await fetch('/api/result', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({
+  //         username: 'DeinBenutzername', // Ersetze dies durch den tatsächlichen Benutzernamen
+  //         answers: 'DeineAntwortenArray,' // Ersetze dies durch das tatsächliche Array von Antworten
+  //       }),
+  //     });
+  
+  //     if (!response.ok) {
+  //       throw new Error('Netzwerkantwort war nicht ok.');
+  //     }
+  
+  //     const data = await response.json();
+  //     console.log("Ergebnis gespeichert:", data);
+  //   } catch (error) {
+  //     console.error("Fehler beim Speichern des Ergebnisses:", error);
+  //   }
+  // };
+  
+  
+
+
   function showResult(){
     navigate('/result', { replace: true });
 }
@@ -88,6 +132,9 @@ const QuestionComponent = () => {
       </ul>
       {currentIndex < questions.length - 1 && (
         <button onClick={handleNext}>Nächste Frage</button> 
+      )}
+      {answerFeedback && (
+        <div>{answerFeedback}</div>
       )}
       {/* Zeige den Link zu den Ergebnissen für die letzte Frage an */}
       {currentIndex === questions.length - 1 && (

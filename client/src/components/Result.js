@@ -90,14 +90,13 @@ export default function Result() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const username = sessionStorage.getItem('username');
-    const { questions: { answers }, result: { result } } = useSelector(state => state);
+    const { questions: { answers } } = useSelector(state => state);
 
     // Berechnen Sie die Punkte und ob die Prüfung bestanden wurde
-    const correctAnswersCount = earnPoints_Number(result, answers, 10);
+    const correctAnswersCount = earnPoints_Number(answers, 10);
 
     // Veröffentlichen Sie das Ergebnis (angenommen, diese Funktion wurde entsprechend angepasst)
-    usePublishResult({ 
-        result, 
+    usePublishResult({
         username,
         points: correctAnswersCount,
         achived : correctAnswersCount >= 5 ? "Passed" : "Failed"
