@@ -14,6 +14,8 @@ export default function Quiz({ onChecked }) {
     const [isQuizCompleted, setIsQuizCompleted] = useState(false);
     const result = useSelector(state => state.result.result);
     const { queue, trace } = useSelector(state => state.questions);
+    const currentIndex = trace; // Verwenden Sie trace aus dem Redux-Store, um den currentIndex zu erhalten
+    const questions = queue;
 
 
     const dispatch = useDispatch();
@@ -36,26 +38,30 @@ export default function Quiz({ onChecked }) {
         setChecked(undefined); // Zurücksetzen des ausgewählten Wertes
     }
 
+    function navigateToLeaderboard(){
+        navigate('/leaderboard', { replace: true });
+    }
     function navigateToResult(){
         navigate('/result', { replace: true });
     }
 
 
-  return (
-    <div className='container'>
-        <h1 className='title text-light'>Quiz</h1>
-
-        {/* display questions */}
-        <Questions onChecked={onChecked} />
-
-        <div className='grid'>
-                {!isQuizCompleted ? (
-                    <button className='btn next' onClick={onNext}>Nächste Frage</button>
-                ) : (
+    return (
+        <div className='container'>
+            <h1 className='title text-light'>Quiz</h1>
+            <Questions onChecked={onChecked} />
+            <div className='grid'>
+                {/* Zeige den Button nur an, wenn das Quiz abgeschlossen ist und die aktuelle Frage die letzte Frage ist */}
+                {isQuizCompleted && currentIndex === 9 && (
                     <button className='btn finish' onClick={navigateToResult}>Quiz abschließen</button>
                 )}
+                {/* Zeige den Button nur an, wenn das Quiz abgeschlossen ist und die aktuelle Frage die letzte Frage ist */}
+                {isQuizCompleted && currentIndex === 9 && (
+                    <button className='btn finish' onClick={navigateToLeaderboard}>Vergleiche dein Ergebnis</button>
+                )}
             </div>
-    </div>
-  )
+        </div>
+  );
+  
 
 }

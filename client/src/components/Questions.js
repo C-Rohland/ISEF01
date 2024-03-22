@@ -1,67 +1,13 @@
-// import React, { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-
-
-// /** Custom Hook */
-// import { useFetchQestion } from '../hooks/FetchQuestion'
-// import { updateResult } from '../hooks/setResult'
-
-
-// export default function Questions({ onChecked }) {
-
-//     const [checked, setChecked] = useState(undefined)
-//     const { trace, queue } = useSelector(state => state.questions); //neu
-   
-//     const questions = queue[trace]; // Aktuelle Frage basierend auf dem Trace-Index
-
-//     const dispatch = useDispatch()
-
-//     useEffect(() => {
-//       if (typeof checked !== 'undefined') {
-//           dispatch(updateResult({ trace, checked }))
-//           onChecked(checked); // Aktualisiere den ausgewählten Wert im übergeordneten Zustand, falls benötigt
-//       }
-//   }, [checked, dispatch, trace, onChecked]); // Füge onChecked zu den Abhängigkeiten hinzu, falls verwendet
-
-//   if (!questions) return <h3 className='text-light'>Lade Fragen...</h3>
-    
-
-
-//     function onSelect(i){
-//         onChecked(i)
-//         setChecked(i)
-//     }
-
-//   return (
-//     <div className='questions'>
-//         <h2 className='text-light'>{questions?.question}</h2>
-
-//          <ul>
-                // {questions?.options.map((option, index) => (
-                //     <li key={index}>
-                //         <input 
-                //             type="radio"
-                //             value={option} // Der Wert sollte möglicherweise der Option entsprechen
-                //             name="options"
-                //             id={`q${index}-option`}
-                //             checked={checked === index} // Markiere die Option als ausgewählt
-                //             onChange={() => setChecked(index)} // Aktualisiere den ausgewählten Wert
-                //         />
-
-                //         <label htmlFor={`q${index}-option`}>{option}</label>
-                //     </li>
-                // ))}
-//             </ul>
-//         </div>
-//   )
-// }
-
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const QuestionComponent = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [questions, setQuestions] = useState([]); 
-  const [checked, setChecked] = useState(undefined)
+  const [checked, setChecked] = useState(undefined);
+  const navigate = useNavigate();
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,14 +17,24 @@ const QuestionComponent = () => {
         throw new Error('Fehler beim Laden der Fragen: ' + response.statusText);
       }
       const data = await response.json();
-      setQuestions(data);
-    } catch (error) {
-      console.error("Fehler beim Laden der Fragen:", error);
-    }
-  };
+      const shuffledData = shuffleArray(data); // Mischen Sie die Daten
+        const randomTenQuestions = shuffledData.slice(0, 10); // Auswahl der ersten 10 Fragen nach dem Mischen
+        setQuestions(randomTenQuestions);
+      } catch (error) {
+        console.error("Fehler beim Laden der Fragen:", error);
+      }
+    };
     
     fetchData();
   }, []);
+
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
 
   const loadNextQuestion = () => {
     setCurrentIndex((prevIndex) => {
@@ -86,6 +42,26 @@ const QuestionComponent = () => {
       return prevIndex < questions.length - 1 ? prevIndex + 1 : prevIndex;
     });
   };
+
+  const handleOptionChange = (index) => {
+    setChecked(index); // Aktualisieren der ausgewählten Antwort
+  };
+
+  const handleNext = () => {
+    // Überprüfen, ob eine Antwort ausgewählt wurde
+    if (checked !== null) {
+      // Hier können Sie die ausgewählte Antwort mit der richtigen Antwort vergleichen
+      // Zum Beispiel: if (checked === questions[currentIndex].correctIndex) { ... }
+      
+      // Zur nächsten Frage wechseln
+      loadNextQuestion();
+    } else {
+      alert("Bitte wählen Sie eine Antwort aus.");
+    }
+  };
+  function showResult(){
+    navigate('/result', { replace: true });
+}
 
   // Anzeige, während die Frage geladen wird
   if (questions.length === 0) return <div>Lädt...</div>;
@@ -96,7 +72,7 @@ const QuestionComponent = () => {
     <div>
       <h2>{questionData.question}</h2>
       <ul>
-        {questionData.options && questionData.options.map((option, index) => (
+        {questionData.options.map((option, index) => (
           <li key={index}>
             <input 
               type="radio"
@@ -104,19 +80,21 @@ const QuestionComponent = () => {
               name="options"
               id={`q${index}-option`}
               checked={checked === index} 
-              onChange={() => setChecked(index)} 
+              onChange={() => handleOptionChange(index)} 
             />
             <label htmlFor={`q${index}-option`}>{option}</label>
           </li>
         ))}
       </ul>
       {currentIndex < questions.length - 1 && (
-        <button onClick={loadNextQuestion}>Nächste Frage</button> 
+        <button onClick={handleNext}>Nächste Frage</button> 
+      )}
+      {/* Zeige den Link zu den Ergebnissen für die letzte Frage an */}
+      {currentIndex === questions.length - 1 && (
+        <button onClick={showResult}>Zeige das Ergebnis</button> 
       )}
     </div>
   );
-  
 };
 
 export default QuestionComponent;
-

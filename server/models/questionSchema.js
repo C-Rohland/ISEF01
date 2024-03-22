@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 /** question model */
 const questionModel = new Schema({
     questions: { type : Array, default: []}, // create question with [] default value
-    answers : { type : Array, default: []},
+    answer: String,
     createdAt: { type: Date, default: Date.now },
 });
 

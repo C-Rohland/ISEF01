@@ -8,7 +8,7 @@ import Login from './Login';
 import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
-import ResultTable from './ResultTable';
+import Leaderboard from './Leaderboard';
 
 /** react routes */
 const router = createBrowserRouter([
@@ -34,8 +34,8 @@ const router = createBrowserRouter([
     element : <Result></Result>
   },
   {
-    path : '/resultTable',
-    element : <ResultTable></ResultTable>
+    path : '/leaderboard',
+    element : <Leaderboard></Leaderboard>
   }
 ])
 

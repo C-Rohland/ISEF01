@@ -16,8 +16,8 @@ export default function Main() {
     const createQuiz = () => {
         navigate('/createQuiz'); 
         }
-    const seeResults = () => {
-        navigate('/resultTable'); 
+    const seeLeaderboard = () => {
+        navigate('/leaderboard'); 
         }
     
 
@@ -41,7 +41,7 @@ export default function Main() {
      <div className='start'>
             <button onClick={startQuiz}>Neues Quiz starten</button>
           
-            <button onClick={seeResults}>Leaderboard</button>
+            <button onClick={seeLeaderboard}>Leaderboard</button>
           
             <button onClick={createQuiz}>Quiz erstellen</button>
             </div>

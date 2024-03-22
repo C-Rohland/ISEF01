@@ -1,6 +1,5 @@
 import Questions from "../models/questionSchema.js";
 import Results from "../models/resultSchema.js";
-import questions, { answers } from '../database/data.js'
 import User from "../models/userSchema.js";
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
@@ -92,7 +91,7 @@ export async function getQuestions(req, res){
     }
 }
 
-/** insert all questinos */
+/** insert all questions */
 export async function insertQuestions(req, res){
     try {
         Questions.insertMany({ questions, answers }, function(err, data){
@@ -123,18 +122,49 @@ export async function getResult(req, res){
     }
 }
 
-/** post all result */
-export async function storeResult(req, res){
-   try {
-        const { username, result, attempts, points, achived } = req.body;
-        if(!username && !result) throw new Error('Data Not Provided...!');
 
-        Results.create({ username, result, attempts, points, achived }), 
-            res.json({ msg : "Result Saved Successfully...!"})
-   } catch (error) {
-        res.json({error})
-   }
+export async function storeResult(req, res) {
+    try {
+        const { username, answers } = req.body;
+
+        if (!username || !answers) {
+            throw new Error('Benutzername und Antworten müssen bereitgestellt werden.');
+        }
+
+        let points = 0; // Anfangspunktzahl
+        const results = []; // Hier speichern wir die Ergebnisse jeder Frage
+        const passingScore = 5; // Legen Sie fest, wie viele Punkte zum Bestehen benötigt werden
+
+        // Überprüfen Sie jede Antwort
+        for (const answer of answers) {
+            const question = await Questions.findById(answer.questionId);
+            if (!question) {
+                results.push({ questionId: answer.questionId, correct: false });
+                continue; // Gehe zur nächsten Frage, wenn die Frage nicht gefunden wurde
+            }
+            const correct = question.answer === answer.selectedOption;
+            if (correct) points++; // Punktzahl erhöhen, wenn die Antwort korrekt ist
+            results.push({ questionId: answer.questionId, selectedOption: answer.selectedOption, correct });
+        }
+    
+
+        // Überprüfen, ob die erreichten Punkte zum Bestehen ausreichen
+        const achived = points >= passingScore ? "Passed" : "Failed";
+
+        // Ergebnis für den Benutzer speichern
+        const newResult = await Results.create({
+            username,
+            points, // Die errechnete Punktzahl
+            achived // 'Passed' oder 'Failed' basierend auf den erreichten Punkten
+        });
+
+        res.status(201).json({ message: "Ergebnisse erfolgreich gespeichert!", result: newResult });
+    } catch (error) {
+        console.error('Fehler beim Speichern des Ergebnisses:', error);
+        res.status(500).json({ error: error.message });
+    }
 }
+
 
 /** delete all result*/
 export async function dropResult(req, res){
