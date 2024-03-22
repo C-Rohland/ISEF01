@@ -15,7 +15,7 @@ import '../styles/UserGuide.css'
                     <h2>1. Registrieren:</h2>
                     <p>
                         Um die Quiz-App nutzen zu können, müssen Sie sich zuerst registrieren.
-                        Bitte beachten Sie, dass nur Email-Adressen von IU (@iu.org, @iubh-fernstudium.de) akzeptiert werden.
+                        Bitte beachten Sie, dass nur Email-Adressen von IU (iu-study.org, @iu.org, @iubh-fernstudium.de) akzeptiert werden.
                         Geben Sie Ihre gültige Email-Adresse ein und klicken Sie auf "Registrieren".
                         Dadurch erhalten Sie Zugang zur Anmeldung und zur Teilnahme an Quiz-Sitzungen.
                     </p>

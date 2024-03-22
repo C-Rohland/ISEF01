@@ -5,37 +5,37 @@ Dies ist das Benutzerhandbuch für die Quiz-App. Es bietet eine Schritt-für-Sch
 
 ## 1. Registrieren
 
-Um die Quiz-App nutzen zu können, müssen Sie sich zuerst registrieren. Bitte beachten Sie, dass nur Email-Adressen von IU (@iu.org, @iubh-fernstudium.de) akzeptiert werden. Geben Sie Ihre gültige Email-Adresse ein und klicken Sie auf "Registrieren".
+Um die Quiz-App nutzen zu können, musst du dich zuerst registrieren. Bitte beachte, dass nur Email-Adressen von IU (iu-study.org, @iu.org, @iubh-fernstudium.de) akzeptiert werden. Gib deine gültige Email-Adresse ein und klicke auf "Registrieren".
 
 ![Registrieren](images/registrieren.png)
 
 ## 2. Anmelden
 
-Nach erfolgreicher Registrierung können Sie sich anmelden, um auf Ihr Konto zuzugreifen. Geben Sie dazu die Email-Adresse ein, mit der Sie sich registriert haben, und klicken Sie auf "Anmelden". Dies ermöglicht Ihnen den Zugriff auf die Quiz-Funktionen und Ihr persönliches Profil.
+Nach erfolgreicher Registrierung kannst du dich anmelden, um auf dein Konto zuzugreifen. Gib dazu die Email-Adresse ein, mit der du dich registriert hast, und klicke auf "Anmelden". Dies ermöglicht dir den Zugriff auf die Quiz-Funktionen und dein persönliches Profil.
 
 ![Anmelden](images/anmelden.png)
 
 ## 3. Quiz vorbereiten
 
-Bevor Sie mit dem Quiz beginnen, sollten Sie die Quiz-Regeln lesen und ein Modul oder Thema auswählen, an dem Sie interessiert sind. Die Quiz-Regeln erklären Ihnen, wie das Quiz funktioniert und welche Regeln zu beachten sind. Wählen Sie dann das gewünschte Modul oder Thema aus, um Ihre Wissensgebiete festzulegen.
+Bevor du mit dem Quiz beginnst, solltest du die Quiz-Regeln lesen und ein Modul oder Thema auswählen, an dem du interessiert bist. Die Quiz-Regeln erklären dir, wie das Quiz funktioniert und welche Regeln zu beachten sind. Wähle dann das gewünschte Modul oder Thema aus, um deine Wissensgebiete festzulegen.
 
 ![Quiz vorbereiten](images/quiz-vorbereiten.png)
 
 ## 4. Quiz starten
 
-Klicken Sie auf "Quiz starten", um das Quiz zu beginnen. Das Quiz besteht aus 10 Fragen, die Sie beantworten müssen. Stellen Sie sicher, dass Sie bereit sind, bevor Sie das Quiz starten, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
+Klicke auf "Quiz starten", um das Quiz zu beginnen. Das Quiz besteht aus 10 Fragen, die du beantworten musst. Stelle sicher, dass du bereit bist, bevor du das Quiz startest, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
 
 ![Quiz starten](images/quiz-starten.png)
 
 ## 5. Quiz-Ergebnisse
 
-Nachdem Sie alle Fragen beantwortet haben, werden Ihre Quiz-Ergebnisse zusammengefasst und angezeigt. Sie erhalten Informationen darüber, wie viele Fragen Sie richtig beantwortet haben und welche Punktzahl Sie erzielt haben. Sie haben auch die Möglichkeit, das Quiz erneut zu starten, falls Sie weitere Übung benötigen.
+Nachdem du alle Fragen beantwortet hast, werden deine Quiz-Ergebnisse zusammengefasst und angezeigt. Du erhältst Informationen darüber, wie viele Fragen du richtig beantwortet hast und welche Punktzahl du erzielt hast. Du hast auch die Möglichkeit, das Quiz erneut zu starten, falls du weitere Übung benötigst.
 
 ![Quiz-Ergebnisse](images/quiz-ergebnisse.png)
 
 ## 6. Leaderboard
 
-Auf der Leaderboard-Seite können Sie Ihre Ergebnisse mit denen anderer Studenten vergleichen. Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es Ihnen, Ihre Leistung im Vergleich zu anderen zu sehen.
+Auf der Leaderboard-Seite kannst du deine Ergebnisse mit denen anderer Studenten vergleichen. Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es dir, deine Leistung im Vergleich zu anderen zu sehen.
 
 ![Leaderboard](images/leaderboard.png)
 
