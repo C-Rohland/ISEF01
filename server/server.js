@@ -9,16 +9,15 @@ import data from './database/data.js';
 config();
 
 const app = express();
-
-
-console.log(process.env.REACT_APP_SERVER_HOSTNAME); // Sollte die Server-URL ausgeben
+const port = process.env.PORT || 8080;
+const cors = require('cors');
+const express = require('express');
 
 app.use(cors());
 
 app.use(morgan('tiny'));
 app.use(express.json());
 
-const port = process.env.PORT || 8080;
 
 app.use('/api', router);
 
