@@ -30,10 +30,7 @@ const Quiz = () => {
       const isCorrect = selectedOptionText === questions[currentIndex].answer; 
   
       if (isCorrect) {
-        setCorrectAnswers((prev) => {
-          const newCount = prev + 1;
-          return newCount;
-        });
+        setCorrectAnswers(prevCount => prevCount + 1);
         setAnswerFeedback("Richtig!");
       } else {
         setAnswerFeedback("Falsch!");
