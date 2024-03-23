@@ -16,4 +16,18 @@ router.route('/result')
         .post(controller.storeResult)
         .delete(controller.dropResult)
 
+router.route('/leaderboard')
+        .get(controller.getLeaderboard)
+
+// router.post('/updatePoints', controller.updateUserPoints);
+
+
+router.route('/register')
+        .post(controller.registerNewUser)
+        .get(controller.getUser)
+ 
+router.route('/login')
+       .post(controller.loginUser)
+       .get(controller.getUser)
+
 export default router;

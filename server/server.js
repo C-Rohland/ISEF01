@@ -3,47 +3,45 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { config } from 'dotenv';
 import router from './router/route.js';
-
-
-/** import connection file */
 import connect from './database/conn.js';
+import data from './database/data.js'; // Verwende import anstatt require
 
-const app = express()
-
+const app = express();
+const corsOptions = {
+    origin: 'isef-01.vercel.app', // Ersetze dies mit der tatsächlichen Domain deines Frontends
+    optionsSuccessStatus: 200 // einige Legacy-Browser (IE11, verschiedene SmartTVs) verstehen 204 nicht
+  };
 
 /** app middlewares */
 app.use(morgan('tiny'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
-config();
-
+config(); // Lädt Umgebungsvariablen aus .env-Datei
 
 /** appliation port */
 const port = process.env.PORT || 8080;
 
-
 /** routes */
-app.use('/api', router) /** apis */
+app.use('/api', router); // APIs
 
-
-app.get('/', (req, res) => {
+app.get('/login', (req, res) => {
     try {
-        res.json("Get Request")
+        res.json("Get Request");
     } catch (error) {
-        res.json(error)
+        res.json(error);
     }
-})
+});
 
+app.get('/api/questions', (req, res) => {
+  res.json(data);
+});
 
 /** start server only when we have valid connection */
 connect().then(() => {
-    try {
-        app.listen(port, () => {
-            console.log(`Server connected to http://localhost:${port}`)
-        })
-    } catch (error) {
-        console.log("Cannot connect to the server");
-    }
+        app.listen(port, '0.0.0.0', () => {
+            console.log(`Server connected to http://localhost:${port}`);
+        });
+
 }).catch(error => {
-    console.log("Invalid Database Connection");
-})
+    console.log("Invalid Database Connection", error);
+});

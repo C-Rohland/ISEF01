@@ -4,25 +4,44 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 /** import components */
 import Main from './Main';
+import Login from './Login';
+import Register from './Register';
 import Quiz from './Quiz';
 import Result from './Result';
-import { CheckUserExist } from '../helper/helper';
-
+import Leaderboard from './Leaderboard';
+import CreateQuiz from './CreateQuiz';
 
 /** react routes */
 const router = createBrowserRouter([
   {
-    path : '/',
+    path : '/main',
     element : <Main></Main>
+  },
+  
+  {
+    path : '/',
+    element : <Login></Login>
+  },
+  {
+    path : '/register',
+    element : <Register></Register>
   },
   {
     path : '/quiz',
-    element : <CheckUserExist><Quiz /></CheckUserExist>
+    element : <Quiz></Quiz>
   },
   {
     path : '/result',
-    element : <CheckUserExist><Result /></CheckUserExist>
+    element : <Result></Result>
   },
+  {
+    path : '/createQuiz',
+    element : <CreateQuiz></CreateQuiz>
+  },
+  {
+    path : '/leaderboard',
+    element : <Leaderboard></Leaderboard>
+  }
 ])
 
 function App() {

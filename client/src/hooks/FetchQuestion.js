@@ -1,3 +1,4 @@
+// import React from 'react'
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux";
 import { getServerData } from "../helper/helper";
@@ -16,7 +17,7 @@ export const useFetchQestion = () => {
         /** async function fetch backend data */
         (async () => {
             try {
-                const [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`, (data) => data)
+                const [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/questions`, (data) => data)
                 
                 if(questions.length > 0){
                     setGetData(prev => ({...prev, isLoading : false}));
