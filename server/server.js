@@ -4,23 +4,37 @@ import cors from 'cors';
 import { config } from 'dotenv';
 import router from './router/route.js';
 import connect from './database/conn.js';
-import data from './database/data.js'; // Verwende import anstatt require
+import data from './database/data.js';
+
+config();
 
 const app = express();
 
-/** app middlewares */
-app.use(morgan('tiny'));
-app.use(cors({
-    origin: 'https://isef-01-ffntlkwgt-christines-projects-a764adc9.vercel.app'
-  }));
-app.use(express.json());
-config(); // Lädt Umgebungsvariablen aus .env-Datei
+// Definiere eine Liste von erlaubten Herkünften
+const allowedOrigins = [
+    'https://isef-01-ffntlkwgt-christines-projects-a764adc9.vercel.app',
+    'https://isef-01-jwu8q9u1k-christines-projects-a764adc9.vercel.app'
+];
 
-/** appliation port */
+// Konfiguriere CORS-Middleware, um dynamisch zu prüfen, ob die Anfrageherkunft erlaubt ist
+app.use(cors({
+    origin: function(origin, callback) {
+        // Erlaube Anfragen ohne 'Origin' Header, z.B. Postman oder Server-zu-Server Anfragen
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = 'Die CORS-Richtlinie dieser Website erlaubt keinen Zugriff von der spezifizierten Herkunft.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    }
+}));
+
+app.use(morgan('tiny'));
+app.use(express.json());
+
 const port = process.env.PORT || 8080;
 
-/** routes */
-app.use('/api', router); // APIs
+app.use('/api', router);
 
 app.get('/login', (req, res) => {
     try {
@@ -34,12 +48,10 @@ app.get('/api/questions', (req, res) => {
   res.json(data);
 });
 
-/** start server only when we have valid connection */
 connect().then(() => {
-        app.listen(port, '0.0.0.0', () => {
-            console.log(`Server connected to http://localhost:${port}`);
-        });
-
+    app.listen(port, '0.0.0.0', () => {
+        console.log(`Server connected to http://localhost:${port}`);
+    });
 }).catch(error => {
     console.log("Invalid Database Connection", error);
 });
