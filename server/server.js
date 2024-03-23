@@ -13,7 +13,7 @@ const app = express();
 // Definiere eine Liste von erlaubten Herkünften
 const allowedOrigins = [
     'https://isef-01-ffntlkwgt-christines-projects-a764adc9.vercel.app',
-    'https://isef-01-jwu8q9u1k-christines-projects-a764adc9.vercel.app'
+    'isef-01.vercel.app'
 ];
 
 // Konfiguriere CORS-Middleware, um dynamisch zu prüfen, ob die Anfrageherkunft erlaubt ist
