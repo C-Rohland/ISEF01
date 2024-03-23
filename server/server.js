@@ -10,24 +10,14 @@ config();
 
 const app = express();
 
-// Definiere eine Liste von erlaubten Herkünften
-const allowedOrigins = [
-    'https://isef-01-ffntlkwgt-christines-projects-a764adc9.vercel.app',
-    'isef-01.vercel.app'
-];
 
 // Konfiguriere CORS-Middleware, um dynamisch zu prüfen, ob die Anfrageherkunft erlaubt ist
 app.use(cors({
-    origin: function(origin, callback) {
-        // Erlaube Anfragen ohne 'Origin' Header, z.B. Postman oder Server-zu-Server Anfragen
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            var msg = 'Die CORS-Richtlinie dieser Website erlaubt keinen Zugriff von der spezifizierten Herkunft.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
+    origin: ['https://isef-01.vercel.app', 'https://isef-01-ffntlkwgt-christines-projects-a764adc9.vercel.app', 'https://isef-01-jwu8q9u1k-christines-projects-a764adc9.vercel.app'],
+    methods: ["GET", "POST"], // Füge weitere Methoden hinzu, die dein Frontend verwendet
+    credentials: true // Falls deine Anfragen Credentials wie Cookies benötigen
 }));
+
 
 app.use(morgan('tiny'));
 app.use(express.json());
