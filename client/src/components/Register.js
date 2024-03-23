@@ -37,7 +37,7 @@ function Register() {
 
     // Versucht, die Registrierung über die API durchzuführen
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/register`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
