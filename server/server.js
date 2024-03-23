@@ -10,13 +10,14 @@ config();
 
 const app = express();
 const port = process.env.PORT || 8080;
-const cors = require('cors');
-const express = require('express');
 
-app.use(cors({
-    origin: 'isef-01.vercel.app',
-    methods: ['GET', 'POST'], 
-}));
+const corsOptions = {
+    origin: 'https://isef-01.vercel.app', // Stelle sicher, dass dies die richtige URL deines Frontends ist
+    methods: ['GET', 'POST'], // Erlaubte Methoden
+    optionsSuccessStatus: 200 // Einige Legacy-Browser (IE11, verschiedene SmartTVs) schlagen sonst fehl
+};
+
+app.use(cors(corsOptions));
 
 app.use(morgan('tiny'));
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use('/api', router);
 app.post('/login', (req, res) => {
     res.json({ message: "Login-Endpoint erreicht" });
 });
+app.options('/login', cors(corsOptions));
 
 
 app.get('/api/questions', (req, res) => {
@@ -34,7 +36,7 @@ app.get('/api/questions', (req, res) => {
 });
 
 connect().then(() => {
-    app.listen(port, () => {
+    app.listen(port, '0.0.0.0', () => {
         console.log(`Server connected to http://localhost:${port}`);
     });
 }).catch(error => {
