@@ -7,10 +7,14 @@ import connect from './database/conn.js';
 import data from './database/data.js'; // Verwende import anstatt require
 
 const app = express();
+const corsOptions = {
+    origin: 'https://deine-frontend-domain.vercel.app', // Ersetze dies mit der tatsächlichen Domain deines Frontends
+    optionsSuccessStatus: 200 // einige Legacy-Browser (IE11, verschiedene SmartTVs) verstehen 204 nicht
+  };
 
 /** app middlewares */
 app.use(morgan('tiny'));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 config(); // Lädt Umgebungsvariablen aus .env-Datei
 
