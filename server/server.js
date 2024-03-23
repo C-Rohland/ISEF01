@@ -25,10 +25,10 @@ app.use(express.json());
 
 app.use('/api', router);
 
-app.post('/login', (req, res) => {
+app.post('/', (req, res) => {
     res.json({ message: "Login-Endpoint erreicht" });
 });
-app.options('/login', cors(corsOptions));
+app.options('/', cors(corsOptions));
 
 
 app.get('/api/questions', (req, res) => {

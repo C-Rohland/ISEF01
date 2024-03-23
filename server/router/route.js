@@ -26,7 +26,7 @@ router.route('/register')
         .post(controller.registerNewUser)
         .get(controller.getUser)
  
-router.route('/login')
+router.route('/')
        .post(controller.loginUser)
        .get(controller.getUser)
 

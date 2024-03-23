@@ -29,7 +29,7 @@ function Login() {
 
     // Versucht, den Login mit der API durchzuführen
     try {
-      const response = await fetch(`https://isef-server.vercel.app/login`, {
+      const response = await fetch(`https://isef-server.vercel.app/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
