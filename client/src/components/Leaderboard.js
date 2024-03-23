@@ -1,31 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import users from '../database/Users';
 
-    const Leaderboard = () => {
-    const [leaderboardData, setLeaderboardData] = useState([]);
-    const navigate = useNavigate();
+const Leaderboard = () => {
+  const [leaderboardData, setLeaderboardData] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchLeaderboardData = async () => {
-          try {
-            const response = await fetch('/api/updatePoints');
-            const data = await response.json();
-            setLeaderboardData(data);
-          } catch (error) {
-            console.error('Fehler beim Laden des Leaderboards:', error);
-          }
-        };
-    
-        fetchLeaderboardData();
-      }, []);
+  useEffect(() => {
+    // Sortiere die Benutzerdaten nach ihrer Punktzahl
+    const sortedUsers = [...users].sort((a, b) => b.points - a.points);
+    setLeaderboardData(sortedUsers);
+  }, []);
 
-      const startQuiz = () => {
-        navigate('/quiz');
-    };
+  const startQuiz = () => {
+    navigate('/quiz');
+  };
 
-    const navigateToMain = () => {
-        navigate('/main');
-    };
+  const navigateToMain = () => {
+    navigate('/main');
+  };
 
   return (
     <div className='container'>
@@ -42,21 +35,20 @@ import { useNavigate } from 'react-router-dom';
           <tbody>
             {leaderboardData.map((user, index) => (
               <tr key={index}>
-                <td>{index + 1}</td> {/* Platz dynamisch basierend auf dem Index berechnen */}
-                <td>{user.username}</td> {/* Stellen Sie sicher, dass die Feldnamen mit Ihrer DB übereinstimmen */}
+                <td>{index + 1}</td>
+                <td>{user.username}</td>
                 <td>{user.points}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className='start'>
-            <button onClick={startQuiz}>Neues Quiz starten</button>
-          
-            <button onClick={navigateToMain}>Zurück zur Startseite</button>
-            </div>
+          <button onClick={startQuiz}>Neues Quiz starten</button>
+          <button onClick={navigateToMain}>Zurück zur Startseite</button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default Leaderboard;

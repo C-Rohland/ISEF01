@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/UserGuide.css';
 
 function UserGuide() {
     const navigate = useNavigate();
@@ -10,7 +9,7 @@ function UserGuide() {
     };
 
     return (
-        <div className="content-box">
+        <div className="content-box with-border">
              <div className="login-container">
             <h1>Benutzerhandbuch für die Quiz-App</h1>
             <section>
