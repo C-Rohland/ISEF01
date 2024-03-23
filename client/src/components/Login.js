@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import users from './Users';
+import users from '../database/Users';
 
 
 function Login() {
@@ -48,10 +48,10 @@ function Login() {
   };
 
 
-  //Navigiert zur Registrierungsseite
-  const navigateToRegister = () => {
-    navigate('/register'); 
-  };
+  // //Navigiert zur Registrierungsseite
+  // const navigateToRegister = () => {
+  //   navigate('/register'); 
+  // };
 
   //Login-Formular
   return (
@@ -95,8 +95,6 @@ function Login() {
 
         <button type="submit">Anmelden</button>
         <div>
-            <p>Du hast noch keinen Account? Dann registriere dich</p>
-            <button onClick={navigateToRegister}>Registrieren</button>
         </div>
       </form>
         </div>
