@@ -22,7 +22,7 @@ config(); // Lädt Umgebungsvariablen aus .env-Datei
 const port = process.env.PORT || 8080;
 
 /** routes */
-app.use('/api', router); // APIs
+app.use('/api/', router); // APIs
 
 app.get('/login', (req, res) => {
     try {
