@@ -10,12 +10,17 @@ import Quiz from './Quiz';
 import Result from './Result';
 import Leaderboard from './Leaderboard';
 import CreateQuiz from './CreateQuiz';
+import UserGuide from './UserGuide';
 
 /** react routes */
 const router = createBrowserRouter([
   {
     path : '/main',
     element : <Main></Main>
+  },
+  {
+    path : '/userGuide',
+    element : <UserGuide></UserGuide>
   },
   
   {

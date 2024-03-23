@@ -47,16 +47,17 @@ function Login() {
     }
   };
 
+  const navigateToUserGuide = () => {
+    navigate('/userGuide');
+  };
 
-  // //Navigiert zur Registrierungsseite
-  // const navigateToRegister = () => {
-  //   navigate('/register'); 
-  // };
-
-  //Login-Formular
   return (
+    <div className="content-box">
     <div className="login-container">
-      <div className="content-box">
+     
+      <div className="info-button" onClick={navigateToUserGuide}>
+          <button>Info</button>
+        </div>
         <div className="image-side">
         <img src="/img2.svg" alt="Beschreibung" />
         </div>
