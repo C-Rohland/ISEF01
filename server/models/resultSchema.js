@@ -6,10 +6,9 @@ const { Schema } = mongoose;
 const resultModel = new Schema({
     username : { type : String },
     points : { type : Number, default : 0},
-    achived : { type : String, default : ''},
     createdAt : { type : Date, default : Date.now}
 })
 
-const Result = mongoose.model('Result', resultSchema);
+const Result = mongoose.model('Result', resultModel);
 
 export default mongoose.model('result', resultModel);
