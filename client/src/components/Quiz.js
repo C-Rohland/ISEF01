@@ -1,67 +1,107 @@
-import React, { useState } from 'react'
-import Questions from './Questions'
-import { MoveNextQuestion } from '../hooks/FetchQuestion';
-import { pushResultAction } from '../redux/result_reducer';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import dataQuestions from '../database/dataQuestions';
 
-/** redux store import */
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+const Quiz = () => {
+  const [category, setCategory] = useState('');
+  const [questions, setQuestions] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [checked, setChecked] = useState(undefined);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [answerFeedback, setAnswerFeedback] = useState(null);
+  const navigate = useNavigate();
 
-
-export default function Quiz({ onChecked }) {
-
-    const [check, setChecked] = useState(undefined)
-    const [isQuizCompleted, setIsQuizCompleted] = useState(false);
-    const result = useSelector(state => state.result.result);
-    const { queue, trace } = useSelector(state => state.questions);
-    const currentIndex = trace; // Verwenden Sie trace aus dem Redux-Store, um den currentIndex zu erhalten
-    const questions = queue;
-
-
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-
-    /** next button event handler */
-    function onNext(){
-        if(trace < queue.length){
-            /** increase the trace value by one using MoveNextAction */
-            dispatch(MoveNextQuestion());
-
-            /** insert a new result in the array.  */
-            if(result.length <= trace){
-                dispatch(pushResultAction(check))
-            }
-        } else {
-            // Letzte Frage, markiere das Quiz als abgeschlossen
-            setIsQuizCompleted(true);
-        }
-        setChecked(undefined); // Zurücksetzen des ausgewählten Wertes
+  useEffect(() => {
+    if (category) {
+      // Filter questions based on selected category
+      const filteredQuestions = dataQuestions.filter(question => question.subjectname === category);
+      setQuestions(filteredQuestions);
+      setCurrentIndex(0); // Reset currentIndex when category changes
     }
+  }, [category]);
 
-    function navigateToLeaderboard(){
-        navigate('/leaderboard', { replace: true });
-    }
-    function navigateToResult(){
-        navigate('/result', { replace: true });
-    }
+  const handleOptionChange = (index) => {
+    setChecked(index);
+  };
 
-
-    return (
-        <div className='container'>
-            <h1 className='title text-light'>Quiz</h1>
-            <Questions onChecked={onChecked} />
-            <div className='grid'>
-                {/* Zeige den Button nur an, wenn das Quiz abgeschlossen ist und die aktuelle Frage die letzte Frage ist */}
-                {isQuizCompleted && currentIndex === 9 && (
-                    <button className='btn finish' onClick={navigateToResult}>Quiz abschließen</button>
-                )}
-                {/* Zeige den Button nur an, wenn das Quiz abgeschlossen ist und die aktuelle Frage die letzte Frage ist */}
-                {isQuizCompleted && currentIndex === 9 && (
-                    <button className='btn finish' onClick={navigateToLeaderboard}>Vergleiche dein Ergebnis</button>
-                )}
-            </div>
-        </div>
-  );
+  const handleNext = () => {
+    if (checked !== null) {
+      const selectedOptionText = questions[currentIndex].options[checked];
+      const isCorrect = selectedOptionText === questions[currentIndex].answer; 
   
+      if (isCorrect) {
+        setCorrectAnswers((prev) => {
+          const newCount = prev + 1;
+          return newCount;
+        });
+        setAnswerFeedback("Richtig!");
+      } else {
+        setAnswerFeedback("Falsch!");
+      }
+  
+      setTimeout(() => {
+        loadNextQuestion();
+        setChecked(undefined);
+        setAnswerFeedback(null);
+      }, 1000);
+    } else {
+      alert("Bitte wählen Sie eine Antwort aus.");
+    }
+  };
 
-}
+  const loadNextQuestion = () => {
+    setCurrentIndex((prevIndex) => {
+      return prevIndex < questions.length - 1 ? prevIndex + 1 : prevIndex;
+    });
+  };
+
+  const navigateToResult = () => {
+    navigate('/result', { replace: true });
+  };
+
+  const categories = Array.from(new Set(dataQuestions.map(question => question.subjectname)));
+
+  return (
+    <div className="content-box with-border">
+      <div className="login-container">
+        <h1>Quiz</h1>
+        {!category && (
+          <div>
+            <label htmlFor="category">Wähle eine Kategorie:</label>
+            <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">-- Bitte wählen --</option>
+              {categories.map((category, index) => (
+                <option key={index} value={category}>{category}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        {category && questions.length > 0 && (
+          <div>
+            <h2>{questions[currentIndex].question}</h2>
+            <ul>
+              {questions[currentIndex].options.map((option, index) => (
+                <li key={index}>
+                  <input 
+                    type="radio"
+                    value={option} 
+                    name="options"
+                    id={`q${index}-option`}
+                    checked={checked === index} 
+                    onChange={() => handleOptionChange(index)} 
+                  />
+                  <label htmlFor={`q${index}-option`}>{option}</label>
+                </li>
+              ))}
+            </ul>
+            <button onClick={handleNext}>Nächste Frage</button>
+            {answerFeedback && <div>{answerFeedback}</div>}
+            {currentIndex === questions.length - 1 && <button onClick={navigateToResult}>Ergebnis anzeigen</button>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default Quiz;

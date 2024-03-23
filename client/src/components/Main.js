@@ -1,11 +1,11 @@
-//import React, { useRef } from 'react'
+import React, { } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Main.css'
+
 
 export default function Main() {
 
     const navigate = useNavigate();
-
     const username = sessionStorage.getItem('username');
 
 
@@ -41,12 +41,15 @@ export default function Main() {
      <div className='start'>
             <button onClick={startQuiz}>Neues Quiz starten</button>
           
+                
+        
+
             <button onClick={seeLeaderboard}>Leaderboard</button>
           
             <button onClick={createQuiz}>Quiz erstellen</button>
             </div>
-            </div>
-
+            
+</div>
             
   );
 
