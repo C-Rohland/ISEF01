@@ -29,7 +29,7 @@ function Login() {
 
     // Versucht, den Login mit der API durchzuführen
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/login`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_HOSTNAME}/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
