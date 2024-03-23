@@ -13,7 +13,10 @@ const port = process.env.PORT || 8080;
 const cors = require('cors');
 const express = require('express');
 
-app.use(cors());
+app.use(cors({
+    origin: 'isef-01.vercel.app',
+    methods: ['GET', 'POST'], 
+}));
 
 app.use(morgan('tiny'));
 app.use(express.json());
@@ -31,7 +34,7 @@ app.get('/api/questions', (req, res) => {
 });
 
 connect().then(() => {
-    app.listen(port, '0.0.0.0', () => {
+    app.listen(port, () => {
         console.log(`Server connected to http://localhost:${port}`);
     });
 }).catch(error => {
