@@ -22,7 +22,7 @@ config(); // Lädt Umgebungsvariablen aus .env-Datei
 const port = process.env.PORT || 8080;
 
 /** routes */
-app.use('/api/', router); // APIs
+app.use('/api', router); // APIs
 
 app.get('/login', (req, res) => {
     try {
@@ -38,13 +38,10 @@ app.get('/api/questions', (req, res) => {
 
 /** start server only when we have valid connection */
 connect().then(() => {
-    try {
-        app.listen(port, () => {
+        app.listen(port, '0.0.0.0', () => {
             console.log(`Server connected to http://localhost:${port}`);
         });
-    } catch (error) {
-        console.log("Cannot connect to the server", error);
-    }
+
 }).catch(error => {
     console.log("Invalid Database Connection", error);
 });
