@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { HiEye, HiEyeOff } from "react-icons/hi";
+import users from './Users';
 
 
 function Login() {
@@ -26,36 +27,26 @@ function Login() {
       alert('Bitte füllen Sie beide Felder aus.');
       return;
     }
+    console.log(typeof users);
+    console.log(users);
 
-    // Versucht, den Login mit der API durchzuführen
-    try {
-      const response = await fetch(`https://isef-server.vercel.app/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
+    // Überprüfe, ob users tatsächlich ein Array ist
+    if (!Array.isArray(users)) {
+      alert('Fehler beim Laden der Benutzerdaten.');
+      return;
+    }
 
-      if (!response.ok) {
-        throw new Error('Login fehlgeschlagen');
-      }
-
-      // Verarbeitet die Antwort
-      const data = await response.json();
-      sessionStorage.setItem('username', data.user.username); // Speichert die E-Mail als Benutzernamen in sessionStorage
+    // Versuche, den Benutzer zu finden
+    const user = users.find(user => user.email === email && user.password === password);
+    if (user) {
+      sessionStorage.setItem('username', user.username);
       console.log(sessionStorage.getItem('username'));
-
-       // Navigiert zur Hauptseite
-      navigate('/main'); 
-    } catch (error) {
-      console.error(error);
-      alert('Anmeldung fehlgeschlagen: ' + error.message);
+      navigate('/main');
+    } else {
+      alert('Anmeldung fehlgeschlagen: Ungültige E-Mail oder Passwort.');
     }
   };
+
 
   //Navigiert zur Registrierungsseite
   const navigateToRegister = () => {
