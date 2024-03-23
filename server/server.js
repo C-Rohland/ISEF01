@@ -8,7 +8,7 @@ import data from './database/data.js'; // Verwende import anstatt require
 
 const app = express();
 const corsOptions = {
-    origin: 'https://deine-frontend-domain.vercel.app', // Ersetze dies mit der tatsächlichen Domain deines Frontends
+    origin: 'isef-01.vercel.app', // Ersetze dies mit der tatsächlichen Domain deines Frontends
     optionsSuccessStatus: 200 // einige Legacy-Browser (IE11, verschiedene SmartTVs) verstehen 204 nicht
   };
 
