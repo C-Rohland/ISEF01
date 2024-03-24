@@ -43,7 +43,7 @@ const dataQuestions = [
         "großen Datenmengen vor"
       ],
       answer: "… im Internet.",
-      subjectname: "… im Computernetzwerk."
+      subjectname: "Wirtschaftsinformatik"
     },
     {
       _id: "5a",
