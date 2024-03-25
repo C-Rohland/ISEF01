@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'; // Stelle sicher, dass dieser Hook importiert wird
 import dataQuestions from '../database/dataQuestions';
+import { useDispatch } from 'react-redux';
+import { setCorrectAnswersCountAction } from '../redux/result_reducer'; // Stelle sicher, dass der Pfad korrekt ist
+
 
 const Quiz = () => {
   const [category, setCategory] = useState('');
@@ -9,14 +12,15 @@ const Quiz = () => {
   const [checked, setChecked] = useState(undefined);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answerFeedback, setAnswerFeedback] = useState(null);
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
 
   useEffect(() => {
     if (category) {
-      // Filter questions based on selected category
       const filteredQuestions = dataQuestions.filter(question => question.subjectname === category);
       setQuestions(filteredQuestions);
       setCurrentIndex(0); // Reset currentIndex when category changes
+      setCorrectAnswers(0); // Reset correctAnswers when category changes
     }
   }, [category]);
 
@@ -25,35 +29,34 @@ const Quiz = () => {
   };
 
   const handleNext = () => {
-    if (checked !== null) {
+    if (checked !== undefined) { // Geändert von checked !== null
       const selectedOptionText = questions[currentIndex].options[checked];
       const isCorrect = selectedOptionText === questions[currentIndex].answer; 
-  
+
       if (isCorrect) {
         setCorrectAnswers(prevCount => prevCount + 1);
         setAnswerFeedback("Richtig!");
       } else {
         setAnswerFeedback("Falsch!");
       }
-  
+
       setTimeout(() => {
-        loadNextQuestion();
-        setChecked(undefined);
-        setAnswerFeedback(null);
+        if (currentIndex < questions.length - 1) {
+          setCurrentIndex(prevIndex => prevIndex + 1); // Direktes Aktualisieren von currentIndex
+        } else {
+          navigateToResult();
+        }
+        setChecked(undefined); // Zurücksetzen der Auswahl
+        setAnswerFeedback(null); // Zurücksetzen des Feedbacks
       }, 1000);
     } else {
       alert("Bitte wählen Sie eine Antwort aus.");
     }
   };
 
-  const loadNextQuestion = () => {
-    setCurrentIndex((prevIndex) => {
-      return prevIndex < questions.length - 1 ? prevIndex + 1 : prevIndex;
-    });
-  };
-
   const navigateToResult = () => {
-    navigate('/result', { replace: true });
+    dispatch(setCorrectAnswersCountAction(correctAnswers)); // Verwende die Aktion, um die Anzahl der korrekten Antworten zu aktualisieren
+    navigate('/result', { replace: true }); // Navigiere zur Ergebnisseite
   };
 
   const categories = Array.from(new Set(dataQuestions.map(question => question.subjectname)));
@@ -67,8 +70,8 @@ const Quiz = () => {
             <label htmlFor="category">Wähle eine Kategorie:</label>
             <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="">-- Bitte wählen --</option>
-              {categories.map((category, index) => (
-                <option key={index} value={category}>{category}</option>
+              {categories.map((cat, index) => (
+                <option key={index} value={cat}>{cat}</option>
               ))}
             </select>
           </div>
@@ -91,9 +94,8 @@ const Quiz = () => {
                 </li>
               ))}
             </ul>
-            <button onClick={handleNext}>Nächste Frage</button>
+            <button onClick={handleNext}>{currentIndex === questions.length - 1 ? 'Ergebnis anzeigen' : 'Nächste Frage'}</button>
             {answerFeedback && <div>{answerFeedback}</div>}
-            {currentIndex === questions.length - 1 && <button onClick={navigateToResult}>Ergebnis anzeigen</button>}
           </div>
         )}
       </div>
