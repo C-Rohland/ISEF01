@@ -69,7 +69,7 @@ function Login() {
           <h2>Willkommen</h2>
           <p>Bitte logge dich mit der IU-Mailadresse ein, um fortzufahren.</p>
           <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="input-group">
               <label htmlFor="email">Email</label>
               <input
                 type="text"
@@ -81,7 +81,7 @@ function Login() {
             </div>
 
 
-            <div className="form-group">
+            <div className="input-group">
                 <label htmlFor="password">Passwort</label>
                 <div className="input-group">
                   <input
