@@ -19,10 +19,18 @@ export default function Main() {
     const seeLeaderboard = () => {
         navigate('/leaderboard'); 
         }
+        const logout = () => {
+            sessionStorage.clear(); // Löscht alle gespeicherten Daten im sessionStorage
+            navigate('/'); // Navigiere zurück zur Anmeldeseite, passe den Pfad entsprechend an
+          };
+          
     
 
   return (
     <div>
+        <div className='logout-wrapper'>
+      <button onClick={logout}>Abmelden</button>
+    </div>
     <div className='container'>
             {username && <h1 className='title text-light'>Hallo {username}</h1>}
             

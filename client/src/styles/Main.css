@@ -41,3 +41,17 @@
     border-radius: 3px;
     font-size: 1em;
 }
+
+.logout-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px; /* Abstand vom Rand, anpassbar */
+  }
+
+  .info-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px; /* Abstand vom Rand, anpassbar */
+  }

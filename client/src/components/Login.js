@@ -52,12 +52,16 @@ function Login() {
   };
 
   return (
-    <div className="content-box">
-    <div className="login-container">
-     
-      <div className="info-button" onClick={navigateToUserGuide}>
+    <div>
+      <div className="info-wrapper" onClick={navigateToUserGuide}>
           <button>Info</button>
         </div>
+
+    <div className="content-box">
+      
+    <div className="login-container">
+     
+      
         <div className="image-side">
         <img src="/img2.svg" alt="Beschreibung" />
         </div>
@@ -100,6 +104,7 @@ function Login() {
       </form>
         </div>
       </div>
+    </div>
     </div>
   );
 }
