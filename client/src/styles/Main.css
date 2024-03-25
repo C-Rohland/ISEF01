@@ -55,3 +55,52 @@
     right: 5px; 
     margin: 10px; 
 }
+
+/* Styles in Main.css oder einer anderen relevanten CSS-Datei */
+.answer-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .answer-label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .answer-input {
+    flex-grow: 1;
+    margin-left: 10px; /* Abstand zwischen Radiobutton und Textfeld */
+  }
+  
+  /* Stil für die Aktionsschaltflächen */
+  .form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .form-actions button {
+    flex-basis: 48%; /* Jeder Button nimmt knapp die Hälfte der Breite ein */
+  }
+  
+  .form-group {
+    display: flex;
+    align-items: center; /* Zentriert die Elemente vertikal */
+    margin-bottom: 15px; /* Gibt Abstand nach unten für jede Antwortoption */
+  }
+  
+  /* Radiobutton-Styles */
+  .form-group input[type="radio"] {
+    margin-right: 10px; /* Abstand zwischen Radiobutton und Eingabefeld */
+  }
+  
+  /* Eingabefeld-Styles */
+  .form-group input[type="text"] {
+    width: 100%; /* Nimmt die restliche Breite ein */
+    padding: 10px; /* Polsterung für bessere Lesbarkeit */
+    border: 1px solid #ccc; /* Fügt einen einfachen Rahmen hinzu */
+    border-radius: 4px; /* Leicht gerundete Ecken für das Eingabefeld */
+  }
+  
