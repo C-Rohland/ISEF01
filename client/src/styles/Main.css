@@ -44,14 +44,14 @@
 
 .logout-wrapper {
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px; /* Abstand vom Rand, anpassbar */
-  }
+    top: 5px; 
+    right: 5px; 
+    margin: 10px; 
+}
 
   .info-wrapper {
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 10px; /* Abstand vom Rand, anpassbar */
-  }
+    top: 5px; 
+    right: 5px; 
+    margin: 10px; 
+}
