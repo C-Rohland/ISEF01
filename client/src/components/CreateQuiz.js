@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Main.css';
 
 const categories = ["Wirtschaftsinformatik", "Requirements Engineering", "IT Projektmanagement"];
 
@@ -73,9 +72,9 @@ export default function CreateQuizQuestion() {
             onChange={(e) => setQuestion(e.target.value)}
           />
         </div>
-        <ul>
+        <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
           {answers.map((answer, index) => (
-            <li key={index} className="container">
+            <li key={index} className="container" style={{ listStyleType: 'none' }}>
               <input
                 type="radio"
                 name="correctAnswer"

@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Result.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetResultAction } from '../redux/result_reducer'; 
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +15,23 @@ const Result = () => {
     const navigateToLeaderboard = () => {
         navigate('/leaderboard', { replace: true });
     };
+
+    function getFeedbackMessage(points) {
+        if (points === 0) {
+          return "Du solltest nochmal das Skript durchgehen...";
+        } else if (points <= 4) {
+          return "Durchgefallen: Es gibt noch einiges zu lernen.";
+        } else if (points === 5) {
+          return "Bestanden: Das war knapp, aber du hast es geschafft!";
+        } else if (points <= 7) {
+          return "Bestanden: Gut gemacht, du bist auf dem richtigen Weg!";
+        } else if (points <= 9) {
+          return "Bestanden: Tolle Leistung, du bist fast perfekt!";
+        } else {
+          return "Bereit für die Klausur!";
+        }
+      }
+      
 
     return (
         <div className='container'>
@@ -38,7 +54,9 @@ const Result = () => {
                 </div>
                 <div className='flex'>
                     <span>Quiz Result: </span>
-                    <span style={{ color : correctAnswersCount >= 5 ? "#2aff95" : "#ff2a66" }} className='bold'>{correctAnswersCount >= 5 ? "Passed" : "Failed"}</span>
+                    <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#2aff95" }} className='bold'>
+                    {getFeedbackMessage(correctAnswersCount)}
+                    </span>
                 </div>
             </div>
 

@@ -12,6 +12,7 @@ const Quiz = () => {
   const [checked, setChecked] = useState(undefined);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [answerFeedback, setAnswerFeedback] = useState(null);
+  const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
 
@@ -28,31 +29,64 @@ const Quiz = () => {
     setChecked(index);
   };
 
-  const handleNext = () => {
-    if (checked !== undefined) { // Geändert von checked !== null
-      const selectedOptionText = questions[currentIndex].options[checked];
-      const isCorrect = selectedOptionText === questions[currentIndex].answer; 
+  // const handleNext = () => {
+  //   if (checked !== undefined) { // Geändert von checked !== null
+  //     const selectedOptionText = questions[currentIndex].options[checked];
+  //     const isCorrect = selectedOptionText === questions[currentIndex].answer; 
 
+  //     if (isCorrect) {
+  //       setCorrectAnswers(prevCount => prevCount + 1);
+  //       setAnswerFeedback("Richtig!");
+  //     } else {
+  //       setAnswerFeedback("Falsch!");
+  //     }
+
+  //     setTimeout(() => {
+  //       if (currentIndex < questions.length - 1) {
+  //         setCurrentIndex(prevIndex => prevIndex + 1); // Direktes Aktualisieren von currentIndex
+  //       } else {
+  //         navigateToResult();
+  //       }
+  //       setChecked(undefined); // Zurücksetzen der Auswahl
+  //       setAnswerFeedback(null); // Zurücksetzen des Feedbacks
+  //     }, 1000);
+  //   } else {
+  //     alert("Bitte wählen Sie eine Antwort aus.");
+  //   }
+  // };
+  const handleNext = () => {
+    if (checked !== undefined) {
+      const selectedOptionText = questions[currentIndex].options[checked];
+      const isCorrect = selectedOptionText === questions[currentIndex].answer;
+      
       if (isCorrect) {
         setCorrectAnswers(prevCount => prevCount + 1);
         setAnswerFeedback("Richtig!");
+        setCorrectOptionIndex(null); // Keine Hervorhebung, da die Antwort richtig ist
       } else {
         setAnswerFeedback("Falsch!");
+        // Finde den Index der richtigen Antwort und speichere ihn
+        const correctIndex = questions[currentIndex].options.findIndex(
+          option => option === questions[currentIndex].answer
+        );
+        setCorrectOptionIndex(correctIndex);
       }
-
+      
       setTimeout(() => {
         if (currentIndex < questions.length - 1) {
-          setCurrentIndex(prevIndex => prevIndex + 1); // Direktes Aktualisieren von currentIndex
+          setCurrentIndex(prevIndex => prevIndex + 1);
         } else {
           navigateToResult();
         }
-        setChecked(undefined); // Zurücksetzen der Auswahl
-        setAnswerFeedback(null); // Zurücksetzen des Feedbacks
+        setChecked(undefined);
+        setAnswerFeedback(null);
+        setCorrectOptionIndex(null); // Reset für die nächste Frage
       }, 1000);
     } else {
       alert("Bitte wählen Sie eine Antwort aus.");
     }
   };
+  
 
   const navigateToResult = () => {
     dispatch(setCorrectAnswersCountAction(correctAnswers)); // Verwende die Aktion, um die Anzahl der korrekten Antworten zu aktualisieren
@@ -89,9 +123,9 @@ const Quiz = () => {
         {category && questions.length > 0 && (
           <div>
             <h2>{questions[currentIndex].question}</h2>
-            <ul>
+            <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
               {questions[currentIndex].options.map((option, index) => (
-                <li key={index}>
+                <li key={index} style={{ listStyleType: 'none' }}>
                   <input 
                     type="radio"
                     value={option} 
@@ -100,7 +134,9 @@ const Quiz = () => {
                     checked={checked === index} 
                     onChange={() => handleOptionChange(index)} 
                   />
-                  <label htmlFor={`q${index}-option`}>{option}</label>
+                  {/* <label htmlFor={`q${index}-option`}>{option}</label> */}
+                  <label htmlFor={`q${currentIndex}-option${index}`} style={{ color: correctOptionIndex === index ? 'green' : 'inherit' }}> {option}
+                  </label>
                 </li>
               ))}
             </ul>
