@@ -10,6 +10,7 @@ const Result = () => {
 
     const onRestart = () => {
         dispatch(resetResultAction());
+        navigate('/quiz');
     };
 
     const navigateToLeaderboard = () => {
@@ -45,15 +46,15 @@ const Result = () => {
       </ul>
     </nav>
         </div>
-            <h1>Quiz Application</h1>
+            <h1>Quiz </h1>
 
             <div className='result flex-center'>
                 <div className='flex'>
-                    <span>Correct Answers : </span>
+                    <span>Richtige Antworten </span>
                     <span className='bold'>{`${correctAnswersCount} / 10`}</span>
                 </div>
                 <div className='flex'>
-                    <span>Quiz Result: </span>
+                    <span>Dein Ergebnis: </span>
                     <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#d02a55" }} className='bold'>
                     {getFeedbackMessage(correctAnswersCount)}
                     </span>
@@ -61,7 +62,7 @@ const Result = () => {
             </div>
 
             <div className="container">
-                <button onClick={onRestart}>Restart Quiz</button>
+                <button onClick={onRestart}>Starte das Quiz neu</button>
                 <button onClick={navigateToLeaderboard} class="secondary">Vergleiche dein Ergebnis</button>
             </div>
         </div>
