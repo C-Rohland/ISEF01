@@ -58,8 +58,11 @@ const Result = () => {
                     <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#d02a55" }} className='bold'>
                     {getFeedbackMessage(correctAnswersCount)}
                     </span>
+                    
                 </div>
             </div>
+            <p></p>
+            
 
             <div className="container">
                 <button onClick={onRestart}>Starte das Quiz neu</button>
