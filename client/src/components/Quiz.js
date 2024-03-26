@@ -86,9 +86,11 @@ const Quiz = () => {
     </nav>
         </div>
       <div className="container">
-        <h1>Quiz</h1>
+       
         {!category && (
+          
           <div>
+             <h1>Quiz</h1>
             <label htmlFor="category">Wähle eine Kategorie:</label>
             <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="">-- Bitte wählen --</option>
@@ -100,6 +102,8 @@ const Quiz = () => {
         )}
         {category && questions.length > 0 && (
           <div>
+            <p>Modul: {category} </p>
+            <p>Frage {currentIndex + 1}/{questions.length}:</p>  
             <h2>{questions[currentIndex].question}</h2>
             <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
               {questions[currentIndex].options.map((option, index) => (
@@ -112,7 +116,6 @@ const Quiz = () => {
                     checked={checked === index} 
                     onChange={() => handleOptionChange(index)} 
                   />
-                  {/* <label htmlFor={`q${index}-option`}>{option}</label> */}
                   <label htmlFor={`q${currentIndex}-option${index}`} style={{ color: correctOptionIndex === index ? 'green' : 'inherit' }}> {option}
                   </label>
                 </li>
