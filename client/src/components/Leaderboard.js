@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import users from '../database/Users';
 
+//Leaderboard-Komponente
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const navigate = useNavigate();
 
+  // useEffect-Hook, der beim Mounten der Komponente ausgeführt wird, um die Leaderboard-Daten zu initialisieren
   useEffect(() => {
     // Sortiere die Benutzerdaten nach ihrer Punktzahl
     const sortedUsers = [...users].sort((a, b) => b.points - a.points);

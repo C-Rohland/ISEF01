@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Main.css';
 
+// Definiert eine Liste von Kategorien für die Quizfragen
 const categories = ["Wirtschaftsinformatik", "Requirements Engineering", "IT Projektmanagement"];
 
+// Hauptkomponente für das Erstellen einer neuen Quizfrage
 export default function CreateQuizQuestion() {
   const navigate = useNavigate();
   const [category, setCategory] = useState('');
@@ -11,6 +12,7 @@ export default function CreateQuizQuestion() {
   const [answers, setAnswers] = useState(Array(4).fill(''));
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
 
+  // Funktion zum Speichern der neuen Frage
   const handleSave = () => {
     if (category && question && answers.every(answer => answer.trim() !== '') && correctAnswerIndex !== null) {
       const newQuestion = {
@@ -73,9 +75,9 @@ export default function CreateQuizQuestion() {
             onChange={(e) => setQuestion(e.target.value)}
           />
         </div>
-        <ul>
+        <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
           {answers.map((answer, index) => (
-            <li key={index} className="container">
+            <li key={index} className="container" style={{ listStyleType: 'none' }}>
               <input
                 type="radio"
                 name="correctAnswer"

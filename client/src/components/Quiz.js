@@ -4,23 +4,26 @@ import dataQuestions from '../database/dataQuestions';
 import { useDispatch } from 'react-redux';
 import { setCorrectAnswersCountAction } from '../redux/result_reducer'; // Stelle sicher, dass der Pfad korrekt ist
 
-
+// Die Quiz-Komponente
 const Quiz = () => {
-  const [category, setCategory] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+   // State-Hooks zur Verwaltung verschiedener Aspekte des Quiz
+  const [category, setCategory] = useState('');  // Hält die gewählte Kategorie
+  const [questions, setQuestions] = useState([]);  // Hält die Fragen der gewählten Kategorie
+  const [currentIndex, setCurrentIndex] = useState(0); // Index der aktuellen Frage
   const [checked, setChecked] = useState(undefined);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [answerFeedback, setAnswerFeedback] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState(0); // Anzahl der korrekten Antworten
+  const [answerFeedback, setAnswerFeedback] = useState(null); // Feedback für die ausgewählte Antwort
+  const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
 
   useEffect(() => {
     if (category) {
+      // Filtern der Fragen basierend auf der gewählten Kategorie
       const filteredQuestions = dataQuestions.filter(question => question.subjectname === category);
       setQuestions(filteredQuestions);
-      setCurrentIndex(0); // Reset currentIndex when category changes
-      setCorrectAnswers(0); // Reset correctAnswers when category changes
+      setCurrentIndex(0);  // Zurücksetzen des Frage-Indexes bei Kategoriewechsel
+      setCorrectAnswers(0);// Zurücksetzen der korrekten Antworten bei Kategoriewechsel
     }
   }, [category]);
 
@@ -29,30 +32,39 @@ const Quiz = () => {
   };
 
   const handleNext = () => {
-    if (checked !== undefined) { // Geändert von checked !== null
+    if (checked !== undefined) {
       const selectedOptionText = questions[currentIndex].options[checked];
-      const isCorrect = selectedOptionText === questions[currentIndex].answer; 
-
+      const isCorrect = selectedOptionText === questions[currentIndex].answer;
+      
+       // Logik zur Aktualisierung des State basierend auf der Korrektheit der Antwort
       if (isCorrect) {
         setCorrectAnswers(prevCount => prevCount + 1);
         setAnswerFeedback("Richtig!");
       } else {
         setAnswerFeedback("Falsch!");
+        // Finde den Index der richtigen Antwort und speichere ihn
+        const correctIndex = questions[currentIndex].options.findIndex(
+          option => option === questions[currentIndex].answer
+        );
+        setCorrectOptionIndex(correctIndex);
       }
-
+      
+      // Timeout, um die nächste Frage zu laden oder zum Ergebnis zu navigieren
       setTimeout(() => {
         if (currentIndex < questions.length - 1) {
-          setCurrentIndex(prevIndex => prevIndex + 1); // Direktes Aktualisieren von currentIndex
+          setCurrentIndex(prevIndex => prevIndex + 1);
         } else {
           navigateToResult();
         }
-        setChecked(undefined); // Zurücksetzen der Auswahl
-        setAnswerFeedback(null); // Zurücksetzen des Feedbacks
+        setChecked(undefined);
+        setAnswerFeedback(null);
+        setCorrectOptionIndex(null); // Reset für die nächste Frage
       }, 1000);
     } else {
       alert("Bitte wählen Sie eine Antwort aus.");
     }
   };
+  
 
   const navigateToResult = () => {
     dispatch(setCorrectAnswersCountAction(correctAnswers)); // Verwende die Aktion, um die Anzahl der korrekten Antworten zu aktualisieren
@@ -74,9 +86,11 @@ const Quiz = () => {
     </nav>
         </div>
       <div className="container">
-        <h1>Quiz</h1>
+       
         {!category && (
+          
           <div>
+             <h1>Quiz</h1>
             <label htmlFor="category">Wähle eine Kategorie:</label>
             <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="">-- Bitte wählen --</option>
@@ -88,10 +102,12 @@ const Quiz = () => {
         )}
         {category && questions.length > 0 && (
           <div>
+            <p>Modul: {category} </p>
+            <p>Frage {currentIndex + 1}/{questions.length}:</p>  
             <h2>{questions[currentIndex].question}</h2>
-            <ul>
+            <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
               {questions[currentIndex].options.map((option, index) => (
-                <li key={index}>
+                <li key={index} style={{ listStyleType: 'none' }}>
                   <input 
                     type="radio"
                     value={option} 
@@ -100,7 +116,8 @@ const Quiz = () => {
                     checked={checked === index} 
                     onChange={() => handleOptionChange(index)} 
                   />
-                  <label htmlFor={`q${index}-option`}>{option}</label>
+                  <label htmlFor={`q${currentIndex}-option${index}`} style={{ color: correctOptionIndex === index ? 'green' : 'inherit' }}> {option}
+                  </label>
                 </li>
               ))}
             </ul>

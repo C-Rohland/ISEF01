@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/Result.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetResultAction } from '../redux/result_reducer'; 
 import { useNavigate } from 'react-router-dom';
@@ -11,11 +10,29 @@ const Result = () => {
 
     const onRestart = () => {
         dispatch(resetResultAction());
+        navigate('/quiz');
     };
 
     const navigateToLeaderboard = () => {
         navigate('/leaderboard', { replace: true });
     };
+
+    function getFeedbackMessage(points) {
+        if (points === 0) {
+          return "Du solltest nochmal das Skript durchgehen...";
+        } else if (points <= 4) {
+          return "Durchgefallen: Es gibt noch einiges zu lernen.";
+        } else if (points === 5) {
+          return "Bestanden: Das war knapp, aber du hast es geschafft!";
+        } else if (points <= 7) {
+          return "Bestanden: Gut gemacht, du bist auf dem richtigen Weg!";
+        } else if (points <= 9) {
+          return "Bestanden: Tolle Leistung, du bist fast perfekt!";
+        } else {
+          return "Bereit für die Klausur!";
+        }
+      }
+      
 
     return (
         <div className='container'>
@@ -29,21 +46,26 @@ const Result = () => {
       </ul>
     </nav>
         </div>
-            <h1>Quiz Application</h1>
+            <h1>Quiz </h1>
 
             <div className='result flex-center'>
                 <div className='flex'>
-                    <span>Correct Answers : </span>
+                    <span>Richtige Antworten </span>
                     <span className='bold'>{`${correctAnswersCount} / 10`}</span>
                 </div>
                 <div className='flex'>
-                    <span>Quiz Result: </span>
-                    <span style={{ color : correctAnswersCount >= 5 ? "#2aff95" : "#ff2a66" }} className='bold'>{correctAnswersCount >= 5 ? "Passed" : "Failed"}</span>
+                    <span>Dein Ergebnis: </span>
+                    <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#d02a55" }} className='bold'>
+                    {getFeedbackMessage(correctAnswersCount)}
+                    </span>
+                    
                 </div>
             </div>
+            <p></p>
+            
 
             <div className="container">
-                <button onClick={onRestart}>Restart Quiz</button>
+                <button onClick={onRestart}>Starte das Quiz neu</button>
                 <button onClick={navigateToLeaderboard} class="secondary">Vergleiche dein Ergebnis</button>
             </div>
         </div>

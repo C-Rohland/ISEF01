@@ -1,7 +1,5 @@
 import React, { } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/Main.css'
-
 
 export default function Main() {
 
