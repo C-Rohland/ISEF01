@@ -35,13 +35,17 @@ Stelle sicher, dass du bereit bist, bevor du das Quiz startest, da es keine Unte
 
 ## 4. Quiz-Ergebnisse
 
-Nachdem Sie alle Fragen beantwortet haben, werden Ihre Quiz-Ergebnisse zusammengefasst und angezeigt. Sie erhalten Informationen darüber, wie viele Fragen Sie richtig beantwortet haben und welche Punktzahl Sie erzielt haben. Sie haben auch die Möglichkeit, das Quiz erneut zu starten, falls Sie weitere Übung benötigen.
+Nachdem du alle Fragen beantwortet hast, werden deine Quiz-Ergebnisse zusammengefasst und angezeigt.<br/>
+Du erhältst Informationen darüber, wie viele Fragen du richtig beantwortet hast und welche Punktzahl du erzielt hast.<br/>
+Du hast auch die Möglichkeit, das Quiz erneut zu starten, falls du weitere Übung benötigst.
 
 ![Quiz-Ergebnisse](images/quiz-ergebnisse.png)
 
 ## 5. Leaderboard
 
-Auf der Leaderboard-Seite können Sie Ihre Ergebnisse mit denen anderer Studenten vergleichen. Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es Ihnen, Ihre Leistung im Vergleich zu anderen zu sehen.
+Auf der Leaderboard-Seite kannst du deine Ergebnisse mit denen anderer Studenten vergleichen.<br/>
+Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es dir, deine Leistung im Vergleich zu anderen zu sehen.<br/>
 
 ![Leaderboard](images/leaderboard.png)
 
+<strong>Viel Erfolg!</strong>
