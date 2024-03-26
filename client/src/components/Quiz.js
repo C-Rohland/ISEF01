@@ -69,7 +69,7 @@ const Quiz = () => {
         <li><strong>Quizapp</strong></li>
       </ul>
       <ul>
-        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+        <li><img src="/Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
       </ul>
     </nav>
         </div>
