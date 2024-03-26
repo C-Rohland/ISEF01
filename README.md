@@ -6,8 +6,9 @@ Dies ist das Benutzerhandbuch für die Quiz-App. Es bietet eine Schritt-für-Sch
 Link zum testen: https://prototyp-isef01.vercel.app
 
 
-## 21. Anmelden
-
+## 1. Anmelden
+- <strong >Info</strong> = Benutzerhandbuch
+  
 Um auf den QuizApp Prototypen zugreifen zu können, musst du dich einloggen. Verwende dazu die folgenden Test-Anmeldedaten:
 
 - E-Mail: <strong style="color:#004eb5">iu.tester@iu.org</strong>
@@ -17,27 +18,35 @@ Nach erfolgreicher Anmeldung hast du Zugriff auf die Quiz-Funktionen.
 
 ![QuizApp login](client/public/quiz_anmelden.png)
 
-## 3. Quiz vorbereiten
 
-Bevor Sie mit dem Quiz beginnen, sollten Sie die Quiz-Regeln lesen und ein Modul oder Thema auswählen, an dem Sie interessiert sind. Die Quiz-Regeln erklären Ihnen, wie das Quiz funktioniert und welche Regeln zu beachten sind. Wählen Sie dann das gewünschte Modul oder Thema aus, um Ihre Wissensgebiete festzulegen.
+## 2. Quiz vorbereiten
+Bevor du mit dem Quiz beginnst, empfehlen wir dir, die Quiz-Regeln zu lesen. <br/>
+Die Quiz-Regeln erklären dir, wie das Quiz funktioniert und welche Regeln zu beachten sind. <br/>
+Wähle dann das gewünschte Modul/Thema aus, um deine Wissensgebiete festzulegen.
 
-![Quiz vorbereiten](images/quiz-vorbereiten.png)
+![Quiz vorbereiten](client/public/quiz_user-regeln.png)
+![Quiz starten](client/public/quiz_module.png)
 
-## 4. Quiz starten
+## 3. Quiz starten
 
-Klicken Sie auf "Quiz starten", um das Quiz zu beginnen. Das Quiz besteht aus 10 Fragen, die Sie beantworten müssen. Stellen Sie sicher, dass Sie bereit sind, bevor Sie das Quiz starten, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
+Klicke auf <strong>Quiz starten</strong>, um das Quiz zu beginnen.<br/>
+Das Quiz besteht aus 10 Fragen, die du beantworten musst.<br/>
+Stelle sicher, dass du bereit bist, bevor du das Quiz startest, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
 
-![Quiz starten](images/quiz-starten.png)
+## 4. Quiz-Ergebnisse
 
-## 5. Quiz-Ergebnisse
+Nachdem du alle Fragen beantwortet hast, werden deine Quiz-Ergebnisse zusammengefasst und angezeigt.<br/>
+Du erhältst Informationen darüber, wie viele Fragen du richtig beantwortet und ob du bestanden hast.
+Du hast auch die Möglichkeit, das Quiz erneut zu starten, falls du weitere Übung benötigst.
 
-Nachdem Sie alle Fragen beantwortet haben, werden Ihre Quiz-Ergebnisse zusammengefasst und angezeigt. Sie erhalten Informationen darüber, wie viele Fragen Sie richtig beantwortet haben und welche Punktzahl Sie erzielt haben. Sie haben auch die Möglichkeit, das Quiz erneut zu starten, falls Sie weitere Übung benötigen.
+![Quiz-Ergebnisse](client/public/quiz_ergebnis_nichtBestanden.png)
+![Quiz-Ergebnisse](client/public/quiz_ergebnis_Bestanden.png)
 
-![Quiz-Ergebnisse](images/quiz-ergebnisse.png)
+## 5. Leaderboard
 
-## 6. Leaderboard
+Auf der Leaderboard-Seite kannst du deine Ergebnisse mit denen anderer Studierende vergleichen.<br/>
+Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es dir, deine Leistung im Vergleich zu anderen zu sehen.<br/>
 
-Auf der Leaderboard-Seite können Sie Ihre Ergebnisse mit denen anderer Studenten vergleichen. Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es Ihnen, Ihre Leistung im Vergleich zu anderen zu sehen.
+![Leaderboard](client/public/quiz_leaderboard.png)
 
-![Leaderboard](images/leaderboard.png)
-
+<strong>Viel Erfolg!</strong>
