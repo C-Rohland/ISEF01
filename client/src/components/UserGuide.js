@@ -24,53 +24,49 @@ function UserGuide() {
     </nav>
         </div>
              <div className="container">
-            <h1>Benutzerhandbuch für die Quiz-App</h1>
+            <h3>Benutzerhandbuch für die Quiz-App</h3>
+        
             <section>
-                <h2>1. Registrieren:</h2>
+                <h4>1. Anmelden:</h4>
                 <p>
-                    Um die Quiz-App nutzen zu können, müssen Sie sich zuerst registrieren.
-                    Bitte beachten Sie, dass nur Email-Adressen von IU (iu-study.org, @iu.org, @iubh-fernstudium.de) akzeptiert werden.
-                    Geben Sie Ihre gültige Email-Adresse ein und klicken Sie auf "Registrieren".
-                    Dadurch erhalten Sie Zugang zur Anmeldung und zur Teilnahme an Quiz-Sitzungen.
+                Um auf den QuizApp_Prototypen zugreifen zu können, musst du dich einloggen. Verwende dazu die folgenden Test-Anmeldedaten:
+                <br/>
+                E-Mail: <strong>iu.tester@iu.org </strong>
+                <br/>
+                Passwort: <strong>test123 </strong> 
+                <br/>
+                Nach erfolgreicher Anmeldung hast du Zugriff auf die Quiz-Funktionen.
                 </p>
             </section>
             <section>
-                <h2>2. Anmelden:</h2>
+                <h4>2. Quiz vorbereiten:</h4>
                 <p>
-                    Nach erfolgreicher Registrierung können Sie sich anmelden, um auf Ihr Konto zuzugreifen.
-                    Geben Sie dazu die Email-Adresse ein, mit der Sie sich registriert haben, und klicken Sie auf "Anmelden".
-                    Dies ermöglicht Ihnen den Zugriff auf die Quiz-Funktionen und Ihr persönliches Profil.
+                    Bevor du mit dem Quiz beginnst, empfehlen wir dir, die Quiz-Regeln zu lesen. 
+                    Die Quiz-Regeln erklären dir, wie das Quiz funktioniert und welche Regeln zu beachten sind. 
+                    Wähle dann das gewünschte Modul oder Thema aus, um deine Wissensgebiete festzulegen.
                 </p>
             </section>
             <section>
-                <h2>3. Quiz vorbereiten:</h2>
+                <h4>3. Quiz starten:</h4>
                 <p>
-                    Bevor Sie mit dem Quiz beginnen, sollten Sie die Quiz-Regeln lesen und ein Modul oder Thema auswählen, an dem Sie interessiert sind.
-                    Die Quiz-Regeln erklären Ihnen, wie das Quiz funktioniert und welche Regeln zu beachten sind.
-                    Wählen Sie dann das gewünschte Modul oder Thema aus, um Ihre Wissensgebiete festzulegen.
+                    Klicke auf "Quiz starten", um das Quiz zu beginnen.
+                    Das Quiz besteht aus 10 Fragen, die du beantworten musst.
+                    Stelle sicher, dass du bereit bist, bevor du das Quiz startest, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
                 </p>
             </section>
             <section>
-                <h2>4. Quiz starten:</h2>
+                <h4>4. Quiz-Ergebnisse:</h4>
                 <p>
-                    Klicken Sie auf "Quiz starten", um das Quiz zu beginnen.
-                    Das Quiz besteht aus 10 Fragen, die Sie beantworten müssen.
-                    Stellen Sie sicher, dass Sie bereit sind, bevor Sie das Quiz starten, da es keine Unterbrechung gibt, sobald das Quiz gestartet wurde.
+                    Nachdem du alle Fragen beantwortet hast, werden deine Quiz-Ergebnisse zusammengefasst und angezeigt.
+                    Du erhältst Informationen darüber, wie viele Fragen du richtig beantwortet hast und welche Punktzahl du erzielt hast
+                    Du hast auch die Möglichkeit, das Quiz erneut zu starten, falls du weitere Übung benötigst.
                 </p>
             </section>
             <section>
-                <h2>5. Quiz-Ergebnisse:</h2>
+                <h4>5. Leaderboard:</h4>
                 <p>
-                    Nachdem Sie alle Fragen beantwortet haben, werden Ihre Quiz-Ergebnisse zusammengefasst und angezeigt.
-                    Sie erhalten Informationen darüber, wie viele Fragen Sie richtig beantwortet haben und welche Punktzahl Sie erzielt haben.
-                    Sie haben auch die Möglichkeit, das Quiz erneut zu starten, falls Sie weitere Übung benötigen.
-                </p>
-            </section>
-            <section>
-                <h2>6. Leaderboard:</h2>
-                <p>
-                    Auf der Leaderboard-Seite können Sie Ihre Ergebnisse mit denen anderer Studenten vergleichen.
-                    Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es Ihnen, Ihre Leistung im Vergleich zu anderen zu sehen.
+                    Auf der Leaderboard-Seite kannst du deine Ergebnisse mit denen anderer Studenten vergleichen.
+                    Das Leaderboard zeigt die besten Quiz-Ergebnisse an und ermöglicht es dir, deine Leistung im Vergleich zu anderen zu sehen
                 </p>
             </section>
             <section>

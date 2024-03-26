@@ -8,7 +8,7 @@ const users = [
     { username: 'David', email: 'david.lehmann@iu.org', password: 'david987', points: 5 },
     { username: 'Sophie', email: 'sophie.mueller@iu.org', password: 'sophie123', points: 3 },
     { username: 'Felix', email: 'felix.schulz@iubh-fernstudium.de', password: 'felix456', points: 2 },
-    { username: 'Laura', email: 'laura.schneider@iu-study.org', password: 'laura789', points: 2 }
+    { username: 'IU-Tester', email: 'iu.tester@iu.org', password: 'test123', points: 2 }
   ];
   
   export default users;
