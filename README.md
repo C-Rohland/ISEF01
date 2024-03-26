@@ -3,17 +3,19 @@
 
 Dies ist das Benutzerhandbuch für die Quiz-App. Es bietet eine Schritt-für-Schritt-Anleitung zur Verwendung der App.
 
-## 1. Registrieren
+Link zum testen: https://prototyp-isef01.vercel.app
 
-Um die Quiz-App nutzen zu können, müssen Sie sich zuerst registrieren. Bitte beachten Sie, dass nur Email-Adressen von IU (@iu.org, @iubh-fernstudium.de) akzeptiert werden. Geben Sie Ihre gültige Email-Adresse ein und klicken Sie auf "Registrieren".
 
-![Registrieren](images/registrieren.png)
+## 21. Anmelden
 
-## 2. Anmelden
+Um auf den QuizApp Prototypen zugreifen zu können, musst du dich einloggen. Verwende dazu die folgenden Test-Anmeldedaten:
 
-Nach erfolgreicher Registrierung können Sie sich anmelden, um auf Ihr Konto zuzugreifen. Geben Sie dazu die Email-Adresse ein, mit der Sie sich registriert haben, und klicken Sie auf "Anmelden". Dies ermöglicht Ihnen den Zugriff auf die Quiz-Funktionen und Ihr persönliches Profil.
+- E-Mail: <strong style="color:#004eb5">iu.tester@iu.org</strong>
+- Passwort: <strong style="color:#004eb5">test123</strong>
 
-![Anmelden](images/anmelden.png)
+Nach erfolgreicher Anmeldung hast du Zugriff auf die Quiz-Funktionen.
+
+![QuizApp login](client/public/quiz_anmelden.png)
 
 ## 3. Quiz vorbereiten
 
