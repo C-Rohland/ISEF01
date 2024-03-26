@@ -53,23 +53,25 @@ function Login() {
 
   return (
     <div>
-      <div className="info-wrapper" onClick={navigateToUserGuide}>
-          <button>Info</button>
+      <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+      <ul>
+        <li><button onClick={navigateToUserGuide}>Info</button></li>
+      </ul>
+    </nav>
         </div>
-
-    <div className="content-box">
-      
-    <div className="login-container">
      
-      
-        <div className="image-side">
-        <img src="/img2.svg" alt="Beschreibung" />
-        </div>
-        <div className="text-side">
+        <div className="container">
           <h2>Willkommen</h2>
           <p>Bitte logge dich mit der IU-Mailadresse ein, um fortzufahren.</p>
           <form onSubmit={handleSubmit}>
-          <div className="input-group">
+          <div className="container">
               <label htmlFor="email">Email</label>
               <input
                 type="text"
@@ -81,9 +83,12 @@ function Login() {
             </div>
 
 
-            <div className="input-group">
+            <div className="container">
                 <label htmlFor="password">Passwort</label>
-                <div className="input-group">
+                <div className="container">
+                <span onClick={toggleShowPassword} className="password-icon">
+                    {showPassword ? <HiEyeOff /> : <HiEye />}
+                  </span>
                   <input
                     type={showPassword ? "text" : "password"}
                     id="password"
@@ -92,9 +97,7 @@ function Login() {
                     placeholder="Passwort"
                     required
                   />
-                  <span onClick={toggleShowPassword} className="password-icon">
-                    {showPassword ? <HiEyeOff /> : <HiEye />}
-                  </span>
+                  
                 </div>
               </div>
 
@@ -103,8 +106,6 @@ function Login() {
         </div>
       </form>
         </div>
-      </div>
-    </div>
     </div>
   );
 }

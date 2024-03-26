@@ -62,8 +62,18 @@ const Quiz = () => {
   const categories = Array.from(new Set(dataQuestions.map(question => question.subjectname)));
 
   return (
-    <div className="content-box with-border">
-      <div className="login-container">
+    <div className="container">
+      <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+    </nav>
+        </div>
+      <div className="container">
         <h1>Quiz</h1>
         {!category && (
           <div>

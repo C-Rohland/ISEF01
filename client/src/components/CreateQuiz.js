@@ -42,8 +42,18 @@ export default function CreateQuizQuestion() {
   };
 
   return (
-    <div className="content-box with-border">
-      <div className="login-container">
+    <div className="container">
+      <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+    </nav>
+        </div>
+      <div className="container">
         <h1>Neue Quizfrage erstellen</h1>
         <div>
           <label htmlFor="category">Kategorie:</label>
@@ -65,7 +75,7 @@ export default function CreateQuizQuestion() {
         </div>
         <ul>
           {answers.map((answer, index) => (
-            <li key={index} className="form-group">
+            <li key={index} className="container">
               <input
                 type="radio"
                 name="correctAnswer"
@@ -81,9 +91,9 @@ export default function CreateQuizQuestion() {
             </li>
           ))}
         </ul>
-        <div className="form-actions">
+        <div className="container">
           <button type="button" onClick={handleCancel}>Abbrechen</button>
-          <button type="button" onClick={handleSave}>Frage speichern</button>
+          <button type="button" onClick={handleSave} class="secondary">Frage speichern</button>
         </div>
       </div>
     </div>

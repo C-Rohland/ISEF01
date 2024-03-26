@@ -19,11 +19,28 @@ const Leaderboard = () => {
   const navigateToMain = () => {
     navigate('/main');
   };
+  const logout = () => {
+    sessionStorage.clear(); // Löscht alle gespeicherten Daten im sessionStorage
+    navigate('/'); // Navigiere zurück zur Anmeldeseite, passe den Pfad entsprechend an
+  };
 
   return (
     <div className='container'>
-      <h1 className='title text-light'>Leaderboard</h1>
-      <div className='result flex-center'>
+      <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+      <ul>
+        <li><button onClick={logout}>Abmelden</button></li>
+      </ul>
+    </nav>
+        </div>
+      <h1>Leaderboard</h1>
+      <div className='container'>
         <table>
           <thead>
             <tr>
@@ -42,9 +59,9 @@ const Leaderboard = () => {
             ))}
           </tbody>
         </table>
-        <div className='start'>
+        <div className='container'>
           <button onClick={startQuiz}>Neues Quiz starten</button>
-          <button onClick={navigateToMain}>Zurück zur Startseite</button>
+          <button onClick={navigateToMain} class="secondary">Zurück zur Startseite</button>
         </div>
       </div>
     </div>

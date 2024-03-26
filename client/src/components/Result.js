@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/Result.css';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetResultAction } from '../redux/result_reducer'; 
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +19,17 @@ const Result = () => {
 
     return (
         <div className='container'>
-            <h1 className='title text-light'>Quiz Application</h1>
+            <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+    </nav>
+        </div>
+            <h1>Quiz Application</h1>
 
             <div className='result flex-center'>
                 <div className='flex'>
@@ -28,16 +37,14 @@ const Result = () => {
                     <span className='bold'>{`${correctAnswersCount} / 10`}</span>
                 </div>
                 <div className='flex'>
-                    <span>Quiz Result</span>
+                    <span>Quiz Result: </span>
                     <span style={{ color : correctAnswersCount >= 5 ? "#2aff95" : "#ff2a66" }} className='bold'>{correctAnswersCount >= 5 ? "Passed" : "Failed"}</span>
                 </div>
             </div>
 
-            <div className="restart">
-                <Link className='btn' to={'/main'} onClick={onRestart}>Restart Quiz</Link>
-            </div>
-            <div className="start">
-                <Link className='btn' to={'/leaderboard'} onClick={navigateToLeaderboard}>Vergleiche dein Ergebnis</Link>
+            <div className="container">
+                <button onClick={onRestart}>Restart Quiz</button>
+                <button onClick={navigateToLeaderboard} class="secondary">Vergleiche dein Ergebnis</button>
             </div>
         </div>
     );

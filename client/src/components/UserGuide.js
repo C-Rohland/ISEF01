@@ -9,8 +9,21 @@ function UserGuide() {
     };
 
     return (
-        <div className="content-box with-border">
-             <div className="login-container">
+        <div className="container">
+            <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+      <ul>
+        <li><button onClick={Login}>Anmelden</button></li>
+      </ul>
+    </nav>
+        </div>
+             <div className="container">
             <h1>Benutzerhandbuch für die Quiz-App</h1>
             <section>
                 <h2>1. Registrieren:</h2>
@@ -64,9 +77,6 @@ function UserGuide() {
                 <p>Viel Erfolg!</p>
             </section>
 
-            <div className='login'>
-                <button onClick={Login}>Einloggen</button>
-            </div>
         </div>
         </div>
     );

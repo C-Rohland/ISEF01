@@ -70,15 +70,22 @@ function Register() {
 
   //  Registrierungsformular
   return (
-    <div className="login-container">
-      <div className="content-box">
-        <div className="image-side">
-          <img src="/img2.svg" alt="Beschreibung" />
+    <div className="container">
+      <div className="container">
+      <nav>
+      <ul>
+        <li><strong>Quizapp</strong></li>
+      </ul>
+      <ul>
+        <li><img src="/MicrosoftTeams-image.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+      </ul>
+    </nav>
         </div>
-        <div className="text-side">
+      <div className="container">
+        <div className="container">
           <h2>Registriere dich!</h2>
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
+            <div className="container">
               <label htmlFor="username">Benutzername</label>
               <input
                 type="text"
@@ -90,7 +97,7 @@ function Register() {
               />
             </div>
 
-            <div className="form-group">
+            <div className="container">
               <label htmlFor="email">E-Mail-Adresse</label>
               <input
                 type="email"
@@ -102,9 +109,9 @@ function Register() {
               />
             </div>
 
-            <div className="form-group">
+            <div className="container">
               <label htmlFor="password">Passwort</label>
-              <div className="input-group">
+              <div className="container">
               <input
               type={showPassword ? "text" : "password"}
               id="password"
@@ -121,9 +128,9 @@ function Register() {
              
 
 
-        <div className="form-group">
+        <div className="container">
           <label htmlFor="confirmPassword">Passwort bestätigen</label>
-          <div className="input-group">
+          <div className="container">
             <input
               type={showConfirmPassword ? "text" : "password"}
               id="confirmPassword"
