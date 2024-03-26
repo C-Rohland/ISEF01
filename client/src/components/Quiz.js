@@ -4,24 +4,26 @@ import dataQuestions from '../database/dataQuestions';
 import { useDispatch } from 'react-redux';
 import { setCorrectAnswersCountAction } from '../redux/result_reducer'; // Stelle sicher, dass der Pfad korrekt ist
 
-
+// Die Quiz-Komponente
 const Quiz = () => {
-  const [category, setCategory] = useState('');
-  const [questions, setQuestions] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
+   // State-Hooks zur Verwaltung verschiedener Aspekte des Quiz
+  const [category, setCategory] = useState('');  // Hält die gewählte Kategorie
+  const [questions, setQuestions] = useState([]);  // Hält die Fragen der gewählten Kategorie
+  const [currentIndex, setCurrentIndex] = useState(0); // Index der aktuellen Frage
   const [checked, setChecked] = useState(undefined);
-  const [correctAnswers, setCorrectAnswers] = useState(0);
-  const [answerFeedback, setAnswerFeedback] = useState(null);
+  const [correctAnswers, setCorrectAnswers] = useState(0); // Anzahl der korrekten Antworten
+  const [answerFeedback, setAnswerFeedback] = useState(null); // Feedback für die ausgewählte Antwort
   const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
 
   useEffect(() => {
     if (category) {
+      // Filtern der Fragen basierend auf der gewählten Kategorie
       const filteredQuestions = dataQuestions.filter(question => question.subjectname === category);
       setQuestions(filteredQuestions);
-      setCurrentIndex(0); // Reset currentIndex when category changes
-      setCorrectAnswers(0); // Reset correctAnswers when category changes
+      setCurrentIndex(0);  // Zurücksetzen des Frage-Indexes bei Kategoriewechsel
+      setCorrectAnswers(0);// Zurücksetzen der korrekten Antworten bei Kategoriewechsel
     }
   }, [category]);
 
@@ -29,40 +31,15 @@ const Quiz = () => {
     setChecked(index);
   };
 
-  // const handleNext = () => {
-  //   if (checked !== undefined) { // Geändert von checked !== null
-  //     const selectedOptionText = questions[currentIndex].options[checked];
-  //     const isCorrect = selectedOptionText === questions[currentIndex].answer; 
-
-  //     if (isCorrect) {
-  //       setCorrectAnswers(prevCount => prevCount + 1);
-  //       setAnswerFeedback("Richtig!");
-  //     } else {
-  //       setAnswerFeedback("Falsch!");
-  //     }
-
-  //     setTimeout(() => {
-  //       if (currentIndex < questions.length - 1) {
-  //         setCurrentIndex(prevIndex => prevIndex + 1); // Direktes Aktualisieren von currentIndex
-  //       } else {
-  //         navigateToResult();
-  //       }
-  //       setChecked(undefined); // Zurücksetzen der Auswahl
-  //       setAnswerFeedback(null); // Zurücksetzen des Feedbacks
-  //     }, 1000);
-  //   } else {
-  //     alert("Bitte wählen Sie eine Antwort aus.");
-  //   }
-  // };
   const handleNext = () => {
     if (checked !== undefined) {
       const selectedOptionText = questions[currentIndex].options[checked];
       const isCorrect = selectedOptionText === questions[currentIndex].answer;
       
+       // Logik zur Aktualisierung des State basierend auf der Korrektheit der Antwort
       if (isCorrect) {
         setCorrectAnswers(prevCount => prevCount + 1);
         setAnswerFeedback("Richtig!");
-        setCorrectOptionIndex(null); // Keine Hervorhebung, da die Antwort richtig ist
       } else {
         setAnswerFeedback("Falsch!");
         // Finde den Index der richtigen Antwort und speichere ihn
@@ -72,6 +49,7 @@ const Quiz = () => {
         setCorrectOptionIndex(correctIndex);
       }
       
+      // Timeout, um die nächste Frage zu laden oder zum Ergebnis zu navigieren
       setTimeout(() => {
         if (currentIndex < questions.length - 1) {
           setCurrentIndex(prevIndex => prevIndex + 1);

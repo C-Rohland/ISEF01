@@ -54,7 +54,7 @@ const Result = () => {
                 </div>
                 <div className='flex'>
                     <span>Quiz Result: </span>
-                    <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#2aff95" }} className='bold'>
+                    <span style={{ color : correctAnswersCount >= 5 ? "#2aa9ff" : "#d02a55" }} className='bold'>
                     {getFeedbackMessage(correctAnswersCount)}
                     </span>
                 </div>
