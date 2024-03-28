@@ -19,6 +19,13 @@ const Result = () => {
     const navigateToLeaderboard = () => {
         navigate('/leaderboard', { replace: true });
     };
+    const navigateToMain = () => {
+      navigate('/main');
+    };
+    const logout = () => {
+      sessionStorage.clear(); // Löscht alle gespeicherten Daten im sessionStorage
+      navigate('/'); // Navigiere zurück zur Anmeldeseite, passe den Pfad entsprechend an
+    };
 
     function getFeedbackMessage(points) {
         if (points === 0) {
@@ -45,7 +52,10 @@ const Result = () => {
         <li><strong>Quizapp</strong></li>
       </ul>
       <ul>
-        <li><img src="/Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+        <li><img src="/Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }} onClick={navigateToMain}/></li>
+      </ul>
+      <ul>
+        <li><button onClick={logout}>Abmelden</button></li>
       </ul>
     </nav>
         </div>

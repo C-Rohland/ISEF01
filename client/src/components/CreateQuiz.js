@@ -45,6 +45,13 @@ export default function CreateQuizQuestion() {
     const newAnswers = answers.map((answer, i) => i === index ? text : answer);
     setAnswers(newAnswers);
   };
+  const navigateToMain = () => {
+    navigate('/main');
+  };
+  const logout = () => {
+    sessionStorage.clear(); // Löscht alle gespeicherten Daten im sessionStorage
+    navigate('/'); // Navigiere zurück zur Anmeldeseite, passe den Pfad entsprechend an
+  };
 
   return (
     <div className="container">
@@ -54,7 +61,10 @@ export default function CreateQuizQuestion() {
         <li><strong>Quizapp</strong></li>
       </ul>
       <ul>
-        <li><img src="Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
+        <li><img src="Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }} onClick={navigateToMain}/></li>
+      </ul>
+      <ul>
+      <li><button onClick={logout}>Abmelden</button></li>
       </ul>
     </nav>
         </div>
@@ -81,6 +91,7 @@ export default function CreateQuizQuestion() {
         <ul style={{ listStyleType: 'none', paddingLeft: 0 }}>
           {answers.map((answer, index) => (
             <li key={index} className="container" style={{ listStyleType: 'none' }}>
+              <div role="group">
               <input
                 type="radio"
                 name="correctAnswer"
@@ -93,6 +104,7 @@ export default function CreateQuizQuestion() {
                 onChange={(e) => handleAnswerChange(e.target.value, index)}
                 placeholder={`Antwort ${index + 1}`}
               />
+              </div>
             </li>
           ))}
         </ul>
