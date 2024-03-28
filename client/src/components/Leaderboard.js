@@ -43,6 +43,9 @@ const Leaderboard = () => {
   const navigateToMain = () => {
     navigate('/main');
   };
+  const backToResult = () => {
+    navigate('/result');
+  };
   const logout = () => {
     sessionStorage.clear(); // Löscht alle gespeicherten Daten im sessionStorage
     navigate('/'); // Navigiere zurück zur Anmeldeseite, passe den Pfad entsprechend an
@@ -84,8 +87,10 @@ const Leaderboard = () => {
           </tbody>
         </table>
         <div className='container'>
-          <button onClick={startQuiz}>Neues Quiz starten</button>
-          <button onClick={navigateToMain} class="secondary">Zurück zur Startseite</button>
+        <button onClick={backToResult}>Zurück zum Ergebnis</button>
+          <button onClick={startQuiz} class="secondary">Neues Quiz starten</button>
+          
+          <button onClick={navigateToMain} class="contrast">Zurück zur Startseite</button>
         </div>
       </div>
     </div>
