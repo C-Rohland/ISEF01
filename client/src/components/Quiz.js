@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Stelle sicher, dass dieser Hook importiert wird
+import { useNavigate } from 'react-router-dom'; 
 import dataQuestions from '../database/dataQuestions';
 import { useDispatch } from 'react-redux';
-import { setCorrectAnswersCountAction } from '../redux/result_reducer'; // Stelle sicher, dass der Pfad korrekt ist
+import { setCorrectAnswersCountAction } from '../redux/result_reducer'; 
 import useAuth from '../hooks/useAuth';
 
 // Die Quiz-Komponente
@@ -23,7 +23,23 @@ const Quiz = () => {
     if (category) {
       // Filtern der Fragen basierend auf der gewählten Kategorie
       const filteredQuestions = dataQuestions.filter(question => question.subjectname === category);
-      setQuestions(filteredQuestions);
+
+      // Laden und Filtern der Fragen aus dem LocalStorage
+    const savedQuestions = JSON.parse(localStorage.getItem("savedQuestions") || "[]");
+    const filteredSavedQuestions = savedQuestions.filter(question => question.subjectname === category);
+
+    // Zusammenführen der gefilterten Fragen
+    const combinedQuestions = [...filteredQuestions, ...filteredSavedQuestions];
+
+    let randomQuestions = [];
+    if (combinedQuestions.length > 10) {
+      const shuffled = combinedQuestions.sort(() => 0.5 - Math.random());
+      randomQuestions = shuffled.slice(0, 10);
+    } else {
+      randomQuestions = combinedQuestions;
+    }
+
+      setQuestions(randomQuestions);
       setCurrentIndex(0);  // Zurücksetzen des Frage-Indexes bei Kategoriewechsel
       setCorrectAnswers(0);// Zurücksetzen der korrekten Antworten bei Kategoriewechsel
     }

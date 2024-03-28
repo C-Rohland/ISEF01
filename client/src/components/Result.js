@@ -31,7 +31,7 @@ const Result = () => {
           return "Bestanden: Gut gemacht, du bist auf dem richtigen Weg!";
         } else if (points <= 9) {
           return "Bestanden: Tolle Leistung, du bist fast perfekt!";
-        } else {
+        } else if (points === 10) {
           return "Bereit für die Klausur!";
         }
       }

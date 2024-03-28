@@ -22,10 +22,8 @@ export function usePublishResult(resultData) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Annehmen, dass postServerData eine definierte Funktion ist, die eine POST-Anfrage ausführt
     postServerData('/api/result', resultData).then(response => {
       // Handle response
-      // Möglicherweise eine Aktion dispatchen, um den Store zu aktualisieren
     }).catch(error => {
       console.error("Fehler beim Veröffentlichen des Ergebnisses:", error);
     });
