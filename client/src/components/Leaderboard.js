@@ -11,10 +11,30 @@ const Leaderboard = () => {
 
   // useEffect-Hook, der beim Mounten der Komponente ausgeführt wird, um die Leaderboard-Daten zu initialisieren
   useEffect(() => {
-    // Sortiere die Benutzerdaten nach ihrer Punktzahl
-    const sortedUsers = [...users].sort((a, b) => b.points - a.points);
-    setLeaderboardData(sortedUsers);
-  }, []);
+    const storedResults = JSON.parse(localStorage.getItem('quizResults')) || [];
+    const combinedResults = storedResults.concat(users.map(user => ({
+      username: user.username,
+      score: user.points
+    })));
+    
+    // Sortiere die kombinierten Ergebnisse nach der Punktzahl
+     // Gruppiere Ergebnisse nach Benutzernamen und behalte das beste Ergebnis jedes Benutzers
+  const bestResultsPerUser = combinedResults.reduce((acc, current) => {
+    // Wenn der Benutzer noch nicht im Akkumulator ist oder wenn die aktuelle Punktzahl höher ist, aktualisiere den Eintrag
+    if (!acc[current.username] || acc[current.username].score < current.score) {
+      acc[current.username] = current;
+    }
+    return acc;
+  }, {});
+
+  // Konvertiere das Ergebnis-Objekt zurück in ein Array
+  const bestResultsArray = Object.values(bestResultsPerUser);
+
+  // Sortiere die finale Liste nach der Punktzahl
+  const sortedBestResults = bestResultsArray.sort((a, b) => b.score - a.score);
+  
+  setLeaderboardData(sortedBestResults); // Aktualisiere den State mit den sortierten Ergebnissen
+}, []);
 
   const startQuiz = () => {
     navigate('/quiz');
@@ -58,7 +78,7 @@ const Leaderboard = () => {
               <tr key={index}>
                 <td>{index + 1}</td>
                 <td>{user.username}</td>
-                <td>{user.points}</td>
+                <td>{user.score}</td>
               </tr>
             ))}
           </tbody>

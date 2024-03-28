@@ -18,7 +18,7 @@ const Quiz = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
   useAuth();
-  
+
   useEffect(() => {
     if (category) {
       // Filtern der Fragen basierend auf der gewählten Kategorie
@@ -69,6 +69,12 @@ const Quiz = () => {
   
 
   const navigateToResult = () => {
+    const username = sessionStorage.getItem('username'); // Benutzernamen holen
+    const currentResults = JSON.parse(localStorage.getItem('quizResults')) || []; // Vorherige Ergebnisse holen oder leeres Array
+    const newUserResult = { username, score: correctAnswers }; // Neues Ergebnisobjekt
+    currentResults.push(newUserResult); // Zum Array hinzufügen
+    localStorage.setItem('quizResults', JSON.stringify(currentResults));
+    
     dispatch(setCorrectAnswersCountAction(correctAnswers)); // Verwende die Aktion, um die Anzahl der korrekten Antworten zu aktualisieren
     navigate('/result', { replace: true }); // Navigiere zur Ergebnisseite
   };
