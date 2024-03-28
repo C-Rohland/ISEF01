@@ -83,6 +83,9 @@ const Quiz = () => {
       <ul>
         <li><img src="/Logo.png" alt="Minimal landscape" style={{ width: '50px', height: 'auto' }}/></li>
       </ul>
+      <ul>
+        <li></li>
+      </ul>
     </nav>
         </div>
       <div className="container">
