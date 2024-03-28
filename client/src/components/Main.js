@@ -57,7 +57,7 @@ export default function Main() {
      <div className="container">
       <button onClick={startQuiz}>Quiz starten</button>
       <button onClick={seeLeaderboard} class="secondary">Leaderboard</button>
-      <button onClick={createQuiz} class="contrast">Quiz erstellen</button>
+      <button onClick={createQuiz} class="contrast">Quizfrage erstellen</button>
     </div>     
             
 </div>
