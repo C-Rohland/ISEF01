@@ -2,11 +2,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { resetResultAction } from '../redux/result_reducer'; 
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Result = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    useAuth();
     const correctAnswersCount = useSelector(state => state.result.correctAnswersCount);
+    
 
     const onRestart = () => {
         dispatch(resetResultAction());

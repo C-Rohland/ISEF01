@@ -1,10 +1,13 @@
 import React, { } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 export default function Main() {
 
     const navigate = useNavigate();
+    useAuth();
     const username = sessionStorage.getItem('username');
+    
 
 
 

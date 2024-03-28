@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Stelle sicher, dass dieser Ho
 import dataQuestions from '../database/dataQuestions';
 import { useDispatch } from 'react-redux';
 import { setCorrectAnswersCountAction } from '../redux/result_reducer'; // Stelle sicher, dass der Pfad korrekt ist
+import useAuth from '../hooks/useAuth';
 
 // Die Quiz-Komponente
 const Quiz = () => {
@@ -16,7 +17,8 @@ const Quiz = () => {
   const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate(); // useNavigate Hook richtig initialisieren
-
+  useAuth();
+  
   useEffect(() => {
     if (category) {
       // Filtern der Fragen basierend auf der gewählten Kategorie

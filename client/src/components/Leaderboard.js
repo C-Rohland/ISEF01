@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import users from '../database/Users';
+import useAuth from '../hooks/useAuth';
 
 //Leaderboard-Komponente
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const navigate = useNavigate();
+  useAuth();
 
   // useEffect-Hook, der beim Mounten der Komponente ausgeführt wird, um die Leaderboard-Daten zu initialisieren
   useEffect(() => {

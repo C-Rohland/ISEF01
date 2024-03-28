@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 // Definiert eine Liste von Kategorien für die Quizfragen
 const categories = ["Wirtschaftsinformatik", "Requirements Engineering", "IT Projektmanagement"];
@@ -7,10 +8,12 @@ const categories = ["Wirtschaftsinformatik", "Requirements Engineering", "IT Pro
 // Hauptkomponente für das Erstellen einer neuen Quizfrage
 export default function CreateQuizQuestion() {
   const navigate = useNavigate();
+  useAuth();
   const [category, setCategory] = useState('');
   const [question, setQuestion] = useState('');
   const [answers, setAnswers] = useState(Array(4).fill(''));
   const [correctAnswerIndex, setCorrectAnswerIndex] = useState(null);
+  
 
   // Funktion zum Speichern der neuen Frage
   const handleSave = () => {
